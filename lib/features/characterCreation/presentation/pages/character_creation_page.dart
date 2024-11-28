@@ -1,5 +1,8 @@
+import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
+import 'package:alura_quest/features/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CharacterCreationPage extends StatefulWidget {
   const CharacterCreationPage({super.key});
@@ -24,8 +27,15 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
     super.dispose();
   }
 
+  void _realTimeValidation() {
+    _formKey.currentState!.validate();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final CharactersStore charactersStore =
+        Provider.of<CharactersStore>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -57,6 +67,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     }
                     return null;
                   },
+                  onChanged: _realTimeValidation,
                 ),
                 const SizedBox(
                   height: 16,
@@ -71,6 +82,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     }
                     return null;
                   },
+                  onChanged: _realTimeValidation,
                 ),
                 const SizedBox(
                   height: 16,
@@ -85,6 +97,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     }
                     return null;
                   },
+                  onChanged: _realTimeValidation,
                 ),
                 const SizedBox(
                   height: 16,
@@ -99,23 +112,27 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     }
                     return null;
                   },
+                  onChanged: _realTimeValidation,
                 ),
                 const SizedBox(
                   height: 24,
                 ),
                 Container(
-                  width: 130,
-                  height: 130,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        _inputUrlImageController.text,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  child: _inputUrlImageController.text.isNotEmpty
+                      ? Container(
+                          width: 130,
+                          height: 130,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            image: DecorationImage(
+                              image:
+                                  NetworkImage(_inputUrlImageController.text),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ),
                 const SizedBox(
                   height: 24,
@@ -123,9 +140,26 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
+                      CharacterModel newCharacter = CharacterModel(
+                        name: _inputNameController.text,
+                        race: _inputRaceController.text,
+                        url: _inputUrlImageController.text,
+                        strength: int.parse(_inputStrengthController.text),
                       );
+
+                      charactersStore.addNewCharacter(newCharacter);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: Color.fromARGB(255, 25, 149, 81),
+                          content: Text(
+                            'Personagem criado com suceso',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+
+                      Navigator.pop(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(

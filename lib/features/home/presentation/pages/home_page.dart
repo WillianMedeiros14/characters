@@ -1,7 +1,9 @@
 import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
-import 'package:alura_quest/features/home/data/character_list_data.dart';
+import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -20,7 +22,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+
+    final charactersStore =
+        Provider.of<CharactersStore>(context, listen: false);
+    charactersStore.initializeCharacters();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final CharactersStore charactersStore =
+        Provider.of<CharactersStore>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -29,19 +43,37 @@ class _HomePageState extends State<HomePage> {
       body: AnimatedOpacity(
         opacity: opacityLevel,
         duration: const Duration(microseconds: 700),
-        child: ListView.builder(
-          padding:
-              const EdgeInsets.only(bottom: 100, left: 16, right: 16, top: 0),
-          itemCount: characters.length,
-          itemBuilder: (context, index) {
-            final personagem = characters[index];
-            return PersonagemCardWidget(
-              name: personagem['name'],
-              race: personagem['race'],
-              url: personagem['url'],
-              strength: personagem['strength'],
-            );
-          },
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
+              child: Observer(
+                builder: (_) {
+                  if (charactersStore.isLoading) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 100),
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+
+                  return Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: charactersStore.characterList.map((character) {
+                      return PersonagemCardWidget(
+                        name: character.name,
+                        race: character.race,
+                        url: character.url,
+                        strength: character.strength,
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -7,6 +7,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final String? hintText;
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? contentPadding;
+  final VoidCallback onChanged;
 
   const TextFormFieldWidget({
     Key? key,
@@ -16,6 +17,7 @@ class TextFormFieldWidget extends StatelessWidget {
     this.hintText,
     this.keyboardType,
     this.contentPadding = const EdgeInsets.only(left: 16),
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class TextFormFieldWidget extends StatelessWidget {
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
+      onChanged: (value) => onChanged(),
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
