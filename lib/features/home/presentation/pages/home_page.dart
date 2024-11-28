@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: AnimatedOpacity(
         opacity: opacityLevel,
-        duration: const Duration(microseconds: 700),
+        duration: const Duration(microseconds: 600),
         child: ListView(
           children: [
             Padding(
@@ -76,20 +76,57 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-        onPressed: () => {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const CharacterCreationPage()),
-          )
-        },
-        tooltip: 'Opacity',
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16,
+            bottom: 16,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 25, 149, 81),
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(16),
+                  ),
+                  onPressed: _changeOpacity,
+                  child: opacityLevel == 1.0
+                      ? const Icon(
+                          Icons.visibility,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.visibility_off,
+                          color: Colors.white,
+                        ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 25, 149, 81),
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.all(16),
+                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CharacterCreationPage(),
+                      ),
+                    )
+                  },
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
