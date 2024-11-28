@@ -1,4 +1,5 @@
-import 'package:alura_quest/features/home/presentation/data/character_list_data.dart';
+import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
+import 'package:alura_quest/features/home/data/character_list_data.dart';
 import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -45,17 +46,18 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-        onPressed: _changeOpacity,
+        onPressed: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const CharacterCreationPage()),
+          )
+        },
         tooltip: 'Opacity',
-        child: opacityLevel == 1.0
-            ? const Icon(
-                Icons.visibility,
-                color: Colors.white,
-              )
-            : const Icon(
-                Icons.visibility_off,
-                color: Colors.white,
-              ),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }
