@@ -1,16 +1,58 @@
-# alura_quest
 
-A new Flutter project.
 
-## Getting Started
+## 💻 Projeto
 
-This project is a starting point for a Flutter application.
+- Está aplicação tem como objetivo de reforçar os conceitos basicos de flutter.
+<br>
 
-A few resources to get you started if this is your first Flutter project:
+## ⓘ Informações
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de RPG, cujo objetivo é levar estudantes a uma jornada de domínio da linguagem de programação Dart. Os alunos realizam missões, acumulam habilidades e avançam em desafios para se tornarem mestres em Dart. O foco é transformar o aprendizado técnico em uma experiência interativa e envolvente.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  <br><br>
+
+
+## ✅ Funcionalidades existentes
+
+- Visualizar lista de personagens;
+- Aumentar e dimunuir pontos de vida do personagm;
+- Botão de fazer a lista aparecer e desaparecer.
+
+<br>
+
+## ✅ Resultado do projeto
+
+<h1 align="center">
+  <img alt="Characters" title="Characters" src="assets/home.png" width=230/>
+ 
+</h1>
+
+<br>
+
+## 🎲 Executar
+### Ambiente
+- Certifique-se de que tenha o flutter configurado em sua mpáquina;
+- A versão utilizada nesse projeto é a 3.22.2
+
+### Projeto
+1. Clone o repositório e entre na pasta:
+
+   ```bash
+   git clone https://github.com/WillianMedeiros14/characters.git
+   cd comex_app
+   ```
+
+2. Baixe as dependências:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Execute a aplicação:
+- Depois de ter realizado os passos anteriores, pode rodar normalmente o aplicativo. 
+
+<br>
+
+## 🚀 Principais recursos e tecnologias ultilizadas
+- **[Flutter](https://flutter.dev/)**.
+
