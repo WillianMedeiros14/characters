@@ -58,7 +58,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                   height: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     image: DecorationImage(
                       image: NetworkImage(
                         widget.url,
@@ -124,7 +124,8 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
               ],
             ),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(
+                  bottom: 10, left: 16, right: 16, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -134,7 +135,8 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                       child: LinearProgressIndicator(
                         value: hitPoints / 100,
                         semanticsLabel: 'Linear progress indicator',
-                        backgroundColor: Colors.amber[100],
+                        backgroundColor:
+                            hitPoints > 0 ? Colors.amber[100] : Colors.red,
                         valueColor: const AlwaysStoppedAnimation<Color>(
                           Colors.green,
                         ),
