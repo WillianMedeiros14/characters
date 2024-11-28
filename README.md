@@ -16,7 +16,8 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
 - Visualizar lista de personagens;
 - Aumentar e dimunuir pontos de vida do personagm;
-- Botão de fazer a lista aparecer e desaparecer.
+- Botão de fazer a lista aparecer e desaparecer;
+- Criar novo personagem.
 
 <br>
 
@@ -24,7 +25,8 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
 <h1 align="center">
   <img alt="Characters" title="Characters" src="assets/home.png" width=230/>
- 
+  <img alt="New Characters" title="New Characters" src="assets/2.png" width=230/>
+  <img alt="New Characters Message" title="Characters" src="assets/3.png" width=230/>
 </h1>
 
 <br>
@@ -55,4 +57,5 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
 ## 🚀 Principais recursos e tecnologias ultilizadas
 - **[Flutter](https://flutter.dev/)**.
-
+- **[MobX](https://mobx.netlify.app/)**.
+- **[Provider](https://pub.dev/packages/provider)**.
