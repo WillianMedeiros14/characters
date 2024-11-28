@@ -19,6 +19,24 @@ class PersonagemCardWidget extends StatefulWidget {
 }
 
 class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
+  late double hitPoints = 100;
+
+  void _changeHitPointsUp() {
+    setState(() {
+      if (hitPoints < 100) {
+        hitPoints = hitPoints + 10;
+      }
+    });
+  }
+
+  void _changeHitPointsDown() {
+    setState(() {
+      if (hitPoints > 0) {
+        hitPoints = hitPoints - 10;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -83,16 +101,18 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                               )
                             ],
                           ),
-                          const Column(
+                          Column(
                             children: [
                               ChangeCharacterHitPointButton(
                                 iconButton: Icons.keyboard_arrow_up,
+                                onPressed: _changeHitPointsUp,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               ChangeCharacterHitPointButton(
                                 iconButton: Icons.keyboard_arrow_down,
+                                onPressed: _changeHitPointsDown,
                               ),
                             ],
                           )
@@ -112,7 +132,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                     child: Padding(
                       padding: const EdgeInsets.only(right: 30),
                       child: LinearProgressIndicator(
-                        value: 0.5,
+                        value: hitPoints / 100,
                         semanticsLabel: 'Linear progress indicator',
                         backgroundColor: Colors.amber[100],
                         valueColor: const AlwaysStoppedAnimation<Color>(
@@ -121,9 +141,9 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                       ),
                     ),
                   ),
-                  const Text(
-                    "Vida: 100",
-                    style: TextStyle(
+                  Text(
+                    "Vida: ${hitPoints.toInt()}",
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,

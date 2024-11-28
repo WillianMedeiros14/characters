@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class ChangeCharacterHitPointButton extends StatelessWidget {
   final IconData iconButton;
-  const ChangeCharacterHitPointButton({super.key, required this.iconButton});
+  final VoidCallback onPressed;
+  const ChangeCharacterHitPointButton(
+      {super.key, required this.iconButton, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class ChangeCharacterHitPointButton extends StatelessWidget {
         ),
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: Icon(
           iconButton,
           color: Colors.white,
