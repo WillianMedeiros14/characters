@@ -1,5 +1,5 @@
-import 'package:alura_quest/features/presentation/widgets/change_character_hit_point_button_widget.dart';
-import 'package:alura_quest/features/presentation/widgets/strength_start_widget.dart';
+import 'package:alura_quest/features/home/presentation/widgets/change_character_hit_point_button_widget.dart';
+import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
 import 'package:flutter/material.dart';
 
 class PersonagemCardWidget extends StatefulWidget {

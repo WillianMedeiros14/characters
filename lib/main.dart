@@ -1,4 +1,4 @@
-import 'package:alura_quest/features/presentation/pages/home_page.dart';
+import 'package:alura_quest/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

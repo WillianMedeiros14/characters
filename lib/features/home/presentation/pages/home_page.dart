@@ -1,5 +1,5 @@
-import 'package:alura_quest/features/presentation/data/character_list_data.dart';
-import 'package:alura_quest/features/presentation/widgets/personagem_card_widget.dart';
+import 'package:alura_quest/features/home/presentation/data/character_list_data.dart';
+import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
