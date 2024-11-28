@@ -26,7 +26,8 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 <h1 align="center">
   <img alt="Characters" title="Characters" src="assets/home.png" width=230/>
   <img alt="New Characters" title="New Characters" src="assets/2.png" width=230/>
-  <img alt="New Characters Message" title="Characters" src="assets/3.png" width=230/>
+  <img alt="New Characters Message" title="New Characters Message" src="assets/3.png" width=230/>
+    <img alt="New Characters list" title="ChaNew Characters listracters" src="assets/4.png" width=230/>
 </h1>
 
 <br>
@@ -41,7 +42,7 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
    ```bash
    git clone https://github.com/WillianMedeiros14/characters.git
-   cd comex_app
+   cd characters
    ```
 
 2. Baixe as dependências:
