@@ -1,5 +1,5 @@
 import 'package:alura_quest/features/home/data/character_list_data.dart';
-import 'package:alura_quest/features/shared/model/character_model.dart';
+import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'characters_store.g.dart';

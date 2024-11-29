@@ -1,6 +1,6 @@
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
-import 'package:alura_quest/features/shared/model/character_model.dart';
+import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
