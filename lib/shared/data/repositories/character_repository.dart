@@ -12,16 +12,20 @@ class OrderRepository implements ICharacterRepository {
     try {
       final Database db = await _getDatabase();
 
-      await db.insert(
+      final result = await db.insert(
         TABLE_NAME,
         character.toMap(),
       );
+
+      print('Inserted with id: $result');
+      return result;
     } catch (ex) {
       print(ex);
       return;
     }
   }
 
+  @override
   Future<Database> _getDatabase() async {
     return openDatabase(
       p.join(await getDatabasesPath(), TABLE_NAME),

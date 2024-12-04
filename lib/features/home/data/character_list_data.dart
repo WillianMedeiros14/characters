@@ -1,5 +1,6 @@
 final List<Map<String, dynamic>> characters = [
   {
+    "id": 1,
     'name': 'GandaGandalf',
     'race': 'Mago',
     'url':
@@ -7,6 +8,7 @@ final List<Map<String, dynamic>> characters = [
     'strength': 3,
   },
   {
+    "id": 2,
     'name': 'Elrond',
     'race': 'Elfo',
     'url':
@@ -14,6 +16,7 @@ final List<Map<String, dynamic>> characters = [
     'strength': 5,
   },
   {
+    "id": 3,
     'name': 'Gimli',
     'race': 'Anão',
     'url':
@@ -21,6 +24,7 @@ final List<Map<String, dynamic>> characters = [
     'strength': 4,
   },
   {
+    "id": 4,
     'name': 'Frodo Baggins',
     'race': 'Hobbit',
     'url':
