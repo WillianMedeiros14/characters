@@ -1,4 +1,3 @@
-import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +32,6 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final CharactersStore charactersStore =
-        Provider.of<CharactersStore>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -146,8 +142,6 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                         url: _inputUrlImageController.text,
                         strength: int.parse(_inputStrengthController.text),
                       );
-
-                      charactersStore.addNewCharacter(newCharacter);
 
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

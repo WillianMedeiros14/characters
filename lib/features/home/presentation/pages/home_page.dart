@@ -1,5 +1,5 @@
 import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
-import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
+
 import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -22,19 +22,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    final charactersStore =
-        Provider.of<CharactersStore>(context, listen: false);
-    charactersStore.initializeCharacters();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final charactersStore =
-        Provider.of<CharactersStore>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -48,33 +36,21 @@ class _HomePageState extends State<HomePage> {
         opacity: opacityLevel,
         duration: const Duration(microseconds: 600),
         child: ListView(
-          children: [
+          children: const [
             Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
-              child: Observer(
-                builder: (_) {
-                  if (charactersStore.isLoading) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 100),
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  }
-
-                  return Wrap(
-                    spacing: 16,
-                    runSpacing: 16,
-                    children: charactersStore.characterList.map((character) {
-                      return PersonagemCardWidget(
-                        name: character.name,
-                        race: character.race,
-                        url: character.url,
-                        strength: character.strength,
-                      );
-                    }).toList(),
-                  );
-                },
+              padding: EdgeInsets.only(left: 16, right: 16, bottom: 120),
+              child: Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  PersonagemCardWidget(
+                    name: "Legolas",
+                    race: "Elfo",
+                    url:
+                        "https://files.idyllic.app/files/static/260459?width=750&optimizer=image",
+                    strength: 4,
+                  )
+                ],
               ),
             ),
           ],
