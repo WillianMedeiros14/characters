@@ -1,4 +1,5 @@
 import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
+import 'package:alura_quest/features/characterCreation/presentation/store/character_store.dart';
 
 import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final CharacterStore characterList =
+        Provider.of<CharacterStore>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -36,21 +40,33 @@ class _HomePageState extends State<HomePage> {
         opacity: opacityLevel,
         duration: const Duration(microseconds: 600),
         child: ListView(
-          children: const [
+          children: [
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 120),
-              child: Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                children: [
-                  PersonagemCardWidget(
-                    name: "Legolas",
-                    race: "Elfo",
-                    url:
-                        "https://files.idyllic.app/files/static/260459?width=750&optimizer=image",
-                    strength: 4,
-                  )
-                ],
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 120),
+              child: Observer(
+                builder: (_) {
+                  if (characterList.characterList.length == 0) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Text("Sem dados na lista"),
+                      ),
+                    );
+                  }
+
+                  return Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: characterList.characterList.map((character) {
+                      return PersonagemCardWidget(
+                        name: character.name,
+                        race: character.race,
+                        url: character.url,
+                        strength: character.strength,
+                      );
+                    }).toList(),
+                  );
+                },
               ),
             ),
           ],

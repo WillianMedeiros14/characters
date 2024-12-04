@@ -1,11 +1,15 @@
+import 'package:alura_quest/features/characterCreation/presentation/store/character_store.dart';
 import 'package:alura_quest/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    const MyApp(),
-  );
+  runApp(MultiProvider(
+    providers: [
+      Provider<CharacterStore>(create: (_) => CharacterStore()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
