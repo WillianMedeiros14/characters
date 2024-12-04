@@ -89,7 +89,15 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                   hintText: 'Insira a força (Ex: 3)',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Insira a força (Ex: 3)';
+                      return 'Este campo não pode estar vazio';
+                    }
+
+                    final int? parsedValue = int.tryParse(value);
+
+                    if (parsedValue == null ||
+                        parsedValue < 0 ||
+                        parsedValue > 5) {
+                      return 'Insira a força entre 0 e 5';
                     }
                     return null;
                   },
