@@ -32,13 +32,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final CharactersStore charactersStore =
+    final charactersStore =
         Provider.of<CharactersStore>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Observer(
+          builder: (_) {
+            return Text(widget.title);
+          },
+        ),
       ),
       body: AnimatedOpacity(
         opacity: opacityLevel,
@@ -87,8 +91,8 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(16),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(16),
                   ),
                   onPressed: _changeOpacity,
                   child: opacityLevel == 1.0
@@ -107,8 +111,8 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-                    shape: CircleBorder(),
-                    padding: EdgeInsets.all(16),
+                    shape: const CircleBorder(),
+                    padding: const EdgeInsets.all(16),
                   ),
                   onPressed: () => {
                     Navigator.push(
