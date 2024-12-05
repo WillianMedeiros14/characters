@@ -63,10 +63,7 @@ class _HomePageState extends State<HomePage> {
                     runSpacing: 16,
                     children: charactersStore.characterList.map((character) {
                       return PersonagemCardWidget(
-                        name: character.name,
-                        race: character.race,
-                        url: character.url,
-                        strength: character.strength,
+                        character: character,
                       );
                     }).toList(),
                   );

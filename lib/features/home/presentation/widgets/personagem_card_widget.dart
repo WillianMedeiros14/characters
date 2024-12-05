@@ -1,19 +1,12 @@
 import 'package:alura_quest/features/home/presentation/pages/character_details_page.dart';
 import 'package:alura_quest/features/home/presentation/widgets/change_character_hit_point_button_widget.dart';
 import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
+import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
 
 class PersonagemCardWidget extends StatefulWidget {
-  final String name;
-  final String url;
-  final String race;
-  final int strength;
-  const PersonagemCardWidget(
-      {super.key,
-      required this.name,
-      required this.url,
-      required this.race,
-      required this.strength});
+  final CharacterModel character;
+  const PersonagemCardWidget({super.key, required this.character});
 
   @override
   State<PersonagemCardWidget> createState() => _PersonagemCardWidgetState();
@@ -62,7 +55,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                     color: const Color.fromARGB(255, 255, 255, 255),
                     image: DecorationImage(
                       image: NetworkImage(
-                        widget.url,
+                        widget.character.url,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -79,7 +72,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.name,
+                                widget.character.name,
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
@@ -87,7 +80,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                                 ),
                               ),
                               Text(
-                                widget.race,
+                                widget.character.race,
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
@@ -98,7 +91,7 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                                 height: 5,
                               ),
                               StrengthStartWidget(
-                                strength: widget.strength,
+                                strength: widget.character.strength,
                               )
                             ],
                           ),
@@ -161,8 +154,9 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CharacterDetailsPage(),
-            ),
+                builder: (context) => const CharacterDetailsPage(),
+                settings:
+                    RouteSettings(arguments: {'character': widget.character})),
           )
         },
       ),
