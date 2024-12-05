@@ -51,11 +51,8 @@ abstract class _CharactersStore with Store {
   Future getAllCharacters() async {
     final result = await characterRepository.getAllCharacters();
 
-    print("Result getAll");
-    print(result);
-
     if (result != null) {
-      characterList = ObservableList.of(result);
+      characterList = ObservableList.of(result.reversed);
     }
   }
 }
