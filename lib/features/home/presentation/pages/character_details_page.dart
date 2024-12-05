@@ -1,3 +1,5 @@
+import 'package:alura_quest/features/home/presentation/widgets/change_character_hit_point_button_widget.dart';
+import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,8 @@ class CharacterDetailsPage extends StatefulWidget {
 class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
   late CharacterModel character;
 
+  late double hitPoints = 100;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -26,6 +30,22 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
     } else {
       print("Personagem não passado");
     }
+  }
+
+  void _changeHitPointsUp() {
+    setState(() {
+      if (hitPoints < 100) {
+        hitPoints = hitPoints + 10;
+      }
+    });
+  }
+
+  void _changeHitPointsDown() {
+    setState(() {
+      if (hitPoints > 0) {
+        hitPoints = hitPoints - 10;
+      }
+    });
   }
 
   @override
@@ -76,10 +96,35 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
               padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  Text(
-                    character.name,
-                    style: const TextStyle(
-                        fontSize: 35, fontWeight: FontWeight.w500),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        character.name,
+                        style: const TextStyle(
+                            fontSize: 35, fontWeight: FontWeight.w500),
+                      ),
+                      Column(
+                        children: [
+                          ChangeCharacterHitPointButton(
+                            iconButton: Icons.keyboard_arrow_up,
+                            onPressed: _changeHitPointsUp,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          ChangeCharacterHitPointButton(
+                            iconButton: Icons.keyboard_arrow_down,
+                            onPressed: _changeHitPointsDown,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  StrengthStartWidget(
+                    strength: character.strength,
+                    sizeIcon: 25,
                   )
                 ],
               ),

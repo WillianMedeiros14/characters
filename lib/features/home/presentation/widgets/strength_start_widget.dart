@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class StrengthStartWidget extends StatelessWidget {
   final int strength;
-  const StrengthStartWidget({super.key, required this.strength});
+  final double sizeIcon;
+  const StrengthStartWidget(
+      {super.key, required this.strength, this.sizeIcon = 15});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class StrengthStartWidget extends StatelessWidget {
           return Icon(
             Icons.star,
             color: starColor,
-            size: 15,
+            size: sizeIcon,
           );
         },
       ),
