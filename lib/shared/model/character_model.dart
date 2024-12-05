@@ -1,5 +1,5 @@
 class CharacterModel {
-  final int id;
+  late int id;
   final String name;
   final String race;
   final String url;
@@ -25,7 +25,6 @@ class CharacterModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'name': name,
       'race': race,
       'url': url,

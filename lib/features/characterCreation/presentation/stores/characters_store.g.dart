@@ -41,6 +41,14 @@ mixin _$CharactersStore on _CharactersStore, Store {
     });
   }
 
+  late final _$addNewCharacterAsyncAction =
+      AsyncAction('_CharactersStore.addNewCharacter', context: context);
+
+  @override
+  Future<bool> addNewCharacter(CharacterModel item) {
+    return _$addNewCharacterAsyncAction.run(() => super.addNewCharacter(item));
+  }
+
   late final _$_CharactersStoreActionController =
       ActionController(name: '_CharactersStore', context: context);
 
@@ -50,17 +58,6 @@ mixin _$CharactersStore on _CharactersStore, Store {
         name: '_CharactersStore.initializeCharacters');
     try {
       return super.initializeCharacters();
-    } finally {
-      _$_CharactersStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addNewCharacter(CharacterModel item) {
-    final _$actionInfo = _$_CharactersStoreActionController.startAction(
-        name: '_CharactersStore.addNewCharacter');
-    try {
-      return super.addNewCharacter(item);
     } finally {
       _$_CharactersStoreActionController.endAction(_$actionInfo);
     }

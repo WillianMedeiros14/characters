@@ -6,9 +6,9 @@ import 'package:alura_quest/shared/data/constants/sqlite/CREATE_CHARACTER_TABLE_
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
-class OrderRepository implements ICharacterRepository {
+class CharacterRepository implements ICharacterRepository {
   @override
-  Future createCharacter({required CharacterModel character}) async {
+  Future<int?> createCharacter({required CharacterModel character}) async {
     try {
       final Database db = await _getDatabase();
 
@@ -17,11 +17,10 @@ class OrderRepository implements ICharacterRepository {
         character.toMap(),
       );
 
-      print('Inserted with id: $result');
       return result;
     } catch (ex) {
       print(ex);
-      return;
+      return null;
     }
   }
 

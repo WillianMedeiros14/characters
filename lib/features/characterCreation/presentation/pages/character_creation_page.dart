@@ -138,7 +138,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                   height: 24,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       CharacterModel newCharacter = CharacterModel(
                         name: _inputNameController.text,
@@ -147,19 +147,32 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                         strength: int.parse(_inputStrengthController.text),
                       );
 
-                      charactersStore.addNewCharacter(newCharacter);
+                      final result =
+                          await charactersStore.addNewCharacter(newCharacter);
 
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          backgroundColor: Color.fromARGB(255, 25, 149, 81),
-                          content: Text(
-                            'Personagem criado com suceso',
-                            style: TextStyle(color: Colors.white),
+                      if (result == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Color.fromARGB(255, 25, 149, 81),
+                            content: Text(
+                              'Personagem criado com suceso',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        ),
-                      );
+                        );
 
-                      Navigator.pop(context);
+                        Navigator.pop(context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            backgroundColor: Color.fromARGB(255, 225, 68, 10),
+                            content: Text(
+                              'Erro ao isnerir personagem',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        );
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
