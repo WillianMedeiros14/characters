@@ -1,3 +1,4 @@
+import 'package:alura_quest/features/home/presentation/pages/character_details_page.dart';
 import 'package:alura_quest/features/home/presentation/widgets/change_character_hit_point_button_widget.dart';
 import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +157,14 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
             ),
           ],
         ),
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CharacterDetailsPage(),
+            ),
+          )
+        },
       ),
     );
   }
