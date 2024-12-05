@@ -19,11 +19,16 @@ abstract class _CharactersStore with Store {
   bool isLoading = true;
 
   @action
-  void initializeCharacters() {
+  Future<void> initializeCharacters() async {
     isLoading = true;
-    characterList = ObservableList.of(
-      characters.map((character) => CharacterModel.fromMap(character)),
-    );
+    await getAllCharacters();
+
+    // final dataLocal = characters.map((character) => CharacterModel.fromMap(character));
+    final dataLocal = characters
+        .map((character) => CharacterModel.fromMap(character))
+        .toList();
+
+    characterList.addAll(dataLocal);
 
     isLoading = false;
   }
@@ -39,6 +44,18 @@ abstract class _CharactersStore with Store {
       return true;
     } else {
       return false;
+    }
+  }
+
+  @action
+  Future getAllCharacters() async {
+    final result = await characterRepository.getAllCharacters();
+
+    print("Result getAll");
+    print(result);
+
+    if (result != null) {
+      characterList = ObservableList.of(result);
     }
   }
 }

@@ -4,4 +4,5 @@ import 'package:sqflite/sqflite.dart';
 abstract class ICharacterRepository {
   Future<Database> _getDatabase();
   Future createCharacter({required CharacterModel character});
+  Future<List<CharacterModel>?> getAllCharacters();
 }

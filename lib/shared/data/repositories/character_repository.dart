@@ -25,6 +25,24 @@ class CharacterRepository implements ICharacterRepository {
   }
 
   @override
+  Future<List<CharacterModel>?> getAllCharacters() async {
+    try {
+      final Database db = await _getDatabase();
+      final List<Map<String, dynamic>> maps = await db.query(TABLE_NAME);
+
+      return List.generate(
+        maps.length,
+        (i) {
+          return CharacterModel.fromMap(maps[i]);
+        },
+      );
+    } catch (ex) {
+      print(ex);
+      return null;
+    }
+  }
+
+  @override
   Future<Database> _getDatabase() async {
     return openDatabase(
       p.join(await getDatabasesPath(), TABLE_NAME),
