@@ -3,20 +3,22 @@ class CharacterModel {
   final String name;
   final String race;
   final String url;
+  final String description;
   final int strength;
 
-  CharacterModel({
-    this.id = 0,
-    required this.name,
-    required this.race,
-    required this.url,
-    required this.strength,
-  });
+  CharacterModel(
+      {this.id = 0,
+      required this.name,
+      required this.race,
+      required this.url,
+      required this.strength,
+      required this.description});
 
   factory CharacterModel.fromMap(Map<String, dynamic> map) {
     return CharacterModel(
       id: map['id'],
       name: map['name'],
+      description: map['description'],
       race: map['race'],
       url: map['url'],
       strength: map['strength'],
@@ -29,6 +31,7 @@ class CharacterModel {
       'race': race,
       'url': url,
       'strength': strength,
+      'description': description,
     };
   }
 }

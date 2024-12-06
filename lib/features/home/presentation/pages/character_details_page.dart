@@ -65,68 +65,179 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 100,
-                      height: MediaQuery.of(context).size.width - 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            character.url,
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: SafeArea(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        character.name,
-                        style: const TextStyle(
-                            fontSize: 35, fontWeight: FontWeight.w500),
-                      ),
-                      Column(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Center(
+                      child: Stack(
                         children: [
-                          ChangeCharacterHitPointButton(
-                            iconButton: Icons.keyboard_arrow_up,
-                            onPressed: _changeHitPointsUp,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          ChangeCharacterHitPointButton(
-                            iconButton: Icons.keyboard_arrow_down,
-                            onPressed: _changeHitPointsDown,
+                          Container(
+                            width: MediaQuery.of(context).size.width - 100,
+                            height: MediaQuery.of(context).size.width - 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  character.url,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ],
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                  StrengthStartWidget(
-                    strength: character.strength,
-                    sizeIcon: 25,
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          character.name,
+                          style: const TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.w500),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            StrengthStartWidget(
+                              strength: character.strength,
+                              sizeIcon: 25,
+                            ),
+                            Column(
+                              children: [
+                                ChangeCharacterHitPointButton(
+                                  iconButton: Icons.keyboard_arrow_up,
+                                  onPressed: _changeHitPointsUp,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ChangeCharacterHitPointButton(
+                                  iconButton: Icons.keyboard_arrow_down,
+                                  onPressed: _changeHitPointsDown,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        const LineVertical(),
+                        Text(
+                          character.description,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18),
+                        ),
+                        const LineVertical(),
+                        const SizedBox(
+                          height: 100,
+                        )
+                      ],
+                    ),
                   )
                 ],
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 30,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InformationsCard(
+                  information: character.race,
+                  icon: Icons.groups_2_outlined,
+                ),
+                const SizedBox(width: 20),
+                InformationsCard(
+                  information: hitPoints.toInt().toString(),
+                  icon: Icons.favorite_border,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class LineVertical extends StatelessWidget {
+  const LineVertical({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 0.5,
+      margin: const EdgeInsets.symmetric(vertical: 30),
+      color: const Color.fromARGB(255, 156, 152, 152),
+    );
+  }
+}
+
+class InformationsCard extends StatelessWidget {
+  const InformationsCard({
+    super.key,
+    required this.information,
+    this.icon,
+    this.image,
+  });
+
+  final String information;
+  final IconData? icon;
+  final ImageProvider? image;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      constraints: const BoxConstraints(
+        minWidth: 80,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        color: Colors.amberAccent.shade700,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Verifica se a imagem foi passada
+            image != null
+                ? Image(
+                    image: image!, // Exibe a imagem
+                    height: 30, // Define o tamanho da imagem
+                    width: 30,
+                    fit: BoxFit
+                        .cover, // Ajusta o tamanho da imagem de forma proporcional
+                  )
+                : Icon(
+                    icon, // Caso não tenha imagem, exibe o ícone
+                    size: 30,
+                  ),
+            Text(
+              "$information",
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
               ),
             )
           ],

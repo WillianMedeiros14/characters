@@ -1,1 +1,1 @@
-const String TABLE_NAME = "characters";
+const String TABLE_NAME = "character";

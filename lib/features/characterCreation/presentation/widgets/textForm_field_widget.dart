@@ -8,6 +8,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final EdgeInsetsGeometry? contentPadding;
   final VoidCallback onChanged;
+  final int? maxLines;
 
   const TextFormFieldWidget({
     Key? key,
@@ -16,7 +17,9 @@ class TextFormFieldWidget extends StatelessWidget {
     this.labelText,
     this.hintText,
     this.keyboardType,
-    this.contentPadding = const EdgeInsets.only(left: 16),
+    this.contentPadding =
+        const EdgeInsets.only(left: 16, bottom: 10, right: 16, top: 10),
+    this.maxLines,
     required this.onChanged,
   }) : super(key: key);
 
@@ -27,6 +30,7 @@ class TextFormFieldWidget extends StatelessWidget {
       validator: validator,
       keyboardType: keyboardType,
       onChanged: (value) => onChanged(),
+      maxLines: maxLines,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
@@ -36,6 +40,7 @@ class TextFormFieldWidget extends StatelessWidget {
         contentPadding: contentPadding,
         labelText: labelText,
         hintText: hintText,
+        alignLabelWithHint: true,
       ),
     );
   }

@@ -17,6 +17,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
   final _inputRaceController = TextEditingController();
   final _inputStrengthController = TextEditingController();
   final _inputUrlImageController = TextEditingController();
+  final _inputDescriptionController = TextEditingController();
 
   @override
   void dispose() {
@@ -24,11 +25,13 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
     _inputRaceController.dispose();
     _inputStrengthController.dispose();
     _inputUrlImageController.dispose();
+    _inputDescriptionController.dispose();
     super.dispose();
   }
 
   void _realTimeValidation() {
     _formKey.currentState!.validate();
+    setState(() {});
   }
 
   @override
@@ -115,6 +118,22 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                   onChanged: _realTimeValidation,
                 ),
                 const SizedBox(
+                  height: 16,
+                ),
+                TextFormFieldWidget(
+                  controller: _inputDescriptionController,
+                  labelText: 'Descriçao sobre o personagem',
+                  hintText: 'Insira descriçao sobre o personagem',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Insira descriçao sobre o personagem';
+                    }
+                    return null;
+                  },
+                  onChanged: _realTimeValidation,
+                  maxLines: 5,
+                ),
+                const SizedBox(
                   height: 24,
                 ),
                 Container(
@@ -141,11 +160,11 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       CharacterModel newCharacter = CharacterModel(
-                        name: _inputNameController.text,
-                        race: _inputRaceController.text,
-                        url: _inputUrlImageController.text,
-                        strength: int.parse(_inputStrengthController.text),
-                      );
+                          name: _inputNameController.text,
+                          race: _inputRaceController.text,
+                          url: _inputUrlImageController.text,
+                          strength: int.parse(_inputStrengthController.text),
+                          description: _inputDescriptionController.text);
 
                       final result =
                           await charactersStore.addNewCharacter(newCharacter);

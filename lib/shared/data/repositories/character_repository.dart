@@ -19,6 +19,7 @@ class CharacterRepository implements ICharacterRepository {
 
       return result;
     } catch (ex) {
+      print("Erro ao criar ");
       print(ex);
       return null;
     }
