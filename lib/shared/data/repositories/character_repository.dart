@@ -53,4 +53,26 @@ class CharacterRepository implements ICharacterRepository {
       version: 1,
     );
   }
+
+  @override
+  Future<bool> deleteCharacterById({required int characterId}) async {
+    try {
+      final Database db = await _getDatabase();
+
+      int result = await db.delete(
+        TABLE_NAME,
+        where: "id = ?",
+        whereArgs: [characterId],
+      );
+
+      if (result > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (ex) {
+      print(ex);
+      return false;
+    }
+  }
 }

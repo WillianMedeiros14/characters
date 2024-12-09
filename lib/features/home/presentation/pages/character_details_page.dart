@@ -65,9 +65,11 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
             },
           ),
         ),
-        actions: const [
-          MoreOptionsPageDetails(),
-          SizedBox(
+        actions: [
+          MoreOptionsPageDetails(
+            characterId: character.id,
+          ),
+          const SizedBox(
             width: 5,
           )
         ],

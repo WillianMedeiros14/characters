@@ -55,4 +55,17 @@ abstract class _CharactersStore with Store {
       characterList = ObservableList.of(result.reversed);
     }
   }
+
+  @action
+  Future<bool> deleteCharacterById(int characterId) async {
+    final result =
+        await characterRepository.deleteCharacterById(characterId: characterId);
+
+    if (result == true) {
+      characterList.removeWhere((character) => character.id == characterId);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

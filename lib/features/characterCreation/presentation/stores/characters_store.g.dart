@@ -66,6 +66,15 @@ mixin _$CharactersStore on _CharactersStore, Store {
     return _$getAllCharactersAsyncAction.run(() => super.getAllCharacters());
   }
 
+  late final _$deleteCharacterByIdAsyncAction =
+      AsyncAction('_CharactersStore.deleteCharacterById', context: context);
+
+  @override
+  Future<bool> deleteCharacterById(int characterId) {
+    return _$deleteCharacterByIdAsyncAction
+        .run(() => super.deleteCharacterById(characterId));
+  }
+
   @override
   String toString() {
     return '''
