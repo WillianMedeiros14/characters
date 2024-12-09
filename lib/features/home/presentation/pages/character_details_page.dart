@@ -1,7 +1,8 @@
 import 'package:alura_quest/features/home/presentation/widgets/change_character_hit_point_button_widget.dart';
+import 'package:alura_quest/features/home/presentation/widgets/more_options_page_details.dart';
 import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
@@ -64,15 +65,9 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
             },
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          ),
-          const SizedBox(
+        actions: const [
+          MoreOptionsPageDetails(),
+          SizedBox(
             width: 5,
           )
         ],
