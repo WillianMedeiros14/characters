@@ -6,4 +6,5 @@ abstract class ICharacterRepository {
   Future createCharacter({required CharacterModel character});
   Future<List<CharacterModel>?> getAllCharacters();
   Future<bool> deleteCharacterById({required int characterId});
+  Future<bool> editCharacter({required CharacterModel character});
 }

@@ -75,4 +75,29 @@ class CharacterRepository implements ICharacterRepository {
       return false;
     }
   }
+
+  @override
+  Future<bool> editCharacter({required CharacterModel character}) async {
+    try {
+      final Database db = await _getDatabase();
+
+      int result = await db.update(
+        TABLE_NAME,
+        character.toMap(),
+        where: "id = ?",
+        whereArgs: [character.id],
+      );
+
+      print("result");
+      print(result);
+      if (result > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (ex) {
+      print(ex);
+      return false;
+    }
+  }
 }

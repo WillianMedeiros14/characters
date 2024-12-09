@@ -75,6 +75,15 @@ mixin _$CharactersStore on _CharactersStore, Store {
         .run(() => super.deleteCharacterById(characterId));
   }
 
+  late final _$editCharacterAsyncAction =
+      AsyncAction('_CharactersStore.editCharacter', context: context);
+
+  @override
+  Future<bool> editCharacter({required CharacterModel character}) {
+    return _$editCharacterAsyncAction
+        .run(() => super.editCharacter(character: character));
+  }
+
   @override
   String toString() {
     return '''

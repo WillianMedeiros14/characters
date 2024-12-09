@@ -68,4 +68,23 @@ abstract class _CharactersStore with Store {
       return false;
     }
   }
+
+  @action
+  Future<bool> editCharacter({required CharacterModel character}) async {
+    final result =
+        await characterRepository.editCharacter(character: character);
+
+    if (result == true) {
+      final index = characterList.indexWhere((c) => c.id == character.id);
+
+      if (index != -1) {
+        characterList[index] = character;
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }

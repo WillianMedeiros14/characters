@@ -1,10 +1,12 @@
+import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
+import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MoreOptionsPageDetails extends StatefulWidget {
-  final int characterId;
-  const MoreOptionsPageDetails({super.key, required this.characterId});
+  final CharacterModel character;
+  const MoreOptionsPageDetails({super.key, required this.character});
 
   @override
   State<MoreOptionsPageDetails> createState() => _MoreOptionsPageDetailsState();
@@ -18,7 +20,7 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
 
     void _deleteCharacterById() async {
       final result =
-          await charactersStore.deleteCharacterById(widget.characterId);
+          await charactersStore.deleteCharacterById(widget.character.id);
 
       if (result == true) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -46,6 +48,18 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
       }
     }
 
+    void _editCharacter() {
+      print("Ia para tela de edição/criação");
+      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const CharacterCreationPage(),
+            settings:
+                RouteSettings(arguments: {'character': widget.character})),
+      );
+    }
+
     return IconButton(
       icon: const Icon(Icons.more_vert),
       color: Colors.black,
@@ -71,32 +85,23 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              _deleteCharacterById();
-                            },
-                            child: const Row(
-                              children: [
-                                Icon(
-                                  Icons.delete,
-                                  color: Colors.red,
-                                  size: 30,
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  'Deletar',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 19),
-                                ),
-                              ],
+                      Center(
+                        child: Column(
+                          children: <Widget>[
+                            ItemMoreOptionsPageDetails(
+                              onPressed: _editCharacter,
+                              icon: Icons.edit,
+                              colorIcon: Colors.black,
+                              title: 'Editar',
                             ),
-                          ),
-                        ],
+                            ItemMoreOptionsPageDetails(
+                              onPressed: _deleteCharacterById,
+                              icon: Icons.delete,
+                              colorIcon: Colors.red,
+                              title: 'Deletar',
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -106,6 +111,47 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
           },
         );
       },
+    );
+  }
+}
+
+class ItemMoreOptionsPageDetails extends StatelessWidget {
+  final VoidCallback onPressed;
+  final IconData icon;
+  final Color colorIcon;
+  final String title;
+  const ItemMoreOptionsPageDetails({
+    super.key,
+    required this.onPressed,
+    required this.icon,
+    required this.title,
+    required this.colorIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: colorIcon,
+            size: 30,
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 19,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

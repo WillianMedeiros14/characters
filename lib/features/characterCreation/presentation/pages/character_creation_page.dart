@@ -1,11 +1,13 @@
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
+import 'package:alura_quest/features/home/presentation/pages/character_details_page.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CharacterCreationPage extends StatefulWidget {
-  const CharacterCreationPage({super.key});
+  final CharacterModel? character;
+  const CharacterCreationPage({super.key, this.character});
 
   @override
   State<CharacterCreationPage> createState() => _CharacterCreationPageState();
@@ -34,6 +36,32 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
     setState(() {});
   }
 
+  late CharacterModel? character;
+
+  late double hitPoints = 100;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    if (args != null && args.containsKey('character')) {
+      character = args['character'] as CharacterModel;
+
+      if (character != null) {
+        _inputNameController.text = character!.name;
+        _inputRaceController.text = character!.race;
+        _inputStrengthController.text = character!.strength.toString();
+        _inputUrlImageController.text = character!.url;
+        _inputDescriptionController.text = character!.description;
+      }
+    } else {
+      print("Personagem não passado");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final CharactersStore charactersStore =
@@ -42,9 +70,9 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: const Text(
-          "Novo personagem",
-          style: TextStyle(
+        title: Text(
+          character != null ? "Edição de personagem" : "Novo personagem",
+          style: const TextStyle(
             fontSize: 22,
             color: Colors.black,
             fontWeight: FontWeight.w600,
@@ -166,27 +194,46 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                           strength: int.parse(_inputStrengthController.text),
                           description: _inputDescriptionController.text);
 
-                      final result =
-                          await charactersStore.addNewCharacter(newCharacter);
+                      final bool? result;
+                      if (character == null) {
+                        result =
+                            await charactersStore.addNewCharacter(newCharacter);
+                      } else {
+                        newCharacter.id = character!.id;
+                        result = await charactersStore.editCharacter(
+                            character: newCharacter);
+                      }
 
                       if (result == true) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             backgroundColor: Color.fromARGB(255, 25, 149, 81),
                             content: Text(
-                              'Personagem criado com suceso',
+                              'Personagem ${character != null ? "editado" : "criado"} com suceso',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
                         );
 
-                        Navigator.pop(context);
+                        if (character != null) {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const CharacterDetailsPage(),
+                              settings: RouteSettings(
+                                arguments: {'character': newCharacter},
+                              ),
+                            ),
+                          );
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
+                          SnackBar(
                             backgroundColor: Color.fromARGB(255, 225, 68, 10),
                             content: Text(
-                              'Erro ao isnerir personagem',
+                              'Erro ao ${character != null ? "editar" : "inserir"} personagem',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -201,9 +248,9 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                       50,
                     ),
                   ),
-                  child: const Text(
-                    'Salvar',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  child: Text(
+                    character != null ? 'Salvar edição' : 'Salvar',
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 )
               ],
