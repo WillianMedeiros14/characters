@@ -64,6 +64,18 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
             },
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+            onPressed: () {},
+          ),
+          const SizedBox(
+            width: 5,
+          )
+        ],
       ),
       body: Stack(
         children: [
