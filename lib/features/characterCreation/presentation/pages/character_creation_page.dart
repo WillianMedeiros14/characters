@@ -216,7 +216,8 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                         );
 
                         if (character != null) {
-                          Navigator.pop(context);
+                          Navigator.popUntil(context, (route) => route.isFirst);
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
