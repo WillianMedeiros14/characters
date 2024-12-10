@@ -62,56 +62,54 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.character.name,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
-                                ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.character.name,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
                               ),
-                              Text(
-                                widget.character.race,
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color.fromARGB(255, 81, 80, 80),
-                                ),
+                            ),
+                            Text(
+                              widget.character.race,
+                              style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 81, 80, 80),
                               ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              StrengthStartWidget(
-                                strength: widget.character.strength,
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              ChangeCharacterHitPointButton(
-                                iconButton: Icons.keyboard_arrow_up,
-                                onPressed: _changeHitPointsUp,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              ChangeCharacterHitPointButton(
-                                iconButton: Icons.keyboard_arrow_down,
-                                onPressed: _changeHitPointsDown,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            StrengthStartWidget(
+                              strength: widget.character.strength,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            ChangeCharacterHitPointButton(
+                              iconButton: Icons.keyboard_arrow_up,
+                              onPressed: _changeHitPointsUp,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            ChangeCharacterHitPointButton(
+                              iconButton: Icons.keyboard_arrow_down,
+                              onPressed: _changeHitPointsDown,
+                            ),
+                          ],
+                        )
+                      ],
                     ),
                   ),
                 )
