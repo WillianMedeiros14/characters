@@ -26,6 +26,5 @@ class ChangeCharacterHitPointButton extends StatelessWidget {
         padding: EdgeInsets.zero,
       ),
     );
-    ;
   }
 }

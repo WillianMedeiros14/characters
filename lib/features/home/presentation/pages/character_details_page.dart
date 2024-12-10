@@ -229,21 +229,19 @@ class InformationsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Verifica se a imagem foi passada
             image != null
                 ? Image(
-                    image: image!, // Exibe a imagem
-                    height: 30, // Define o tamanho da imagem
+                    image: image!,
+                    height: 30,
                     width: 30,
-                    fit: BoxFit
-                        .cover, // Ajusta o tamanho da imagem de forma proporcional
+                    fit: BoxFit.cover,
                   )
                 : Icon(
-                    icon, // Caso não tenha imagem, exibe o ícone
+                    icon,
                     size: 30,
                   ),
             Text(
-              "$information",
+              information,
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
