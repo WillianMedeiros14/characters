@@ -2,7 +2,7 @@ import 'package:alura_quest/features/home/presentation/widgets/change_character_
 import 'package:alura_quest/features/home/presentation/widgets/more_options_page_details.dart';
 import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
-
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
@@ -160,22 +160,29 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
             ),
           ),
           Positioned(
-            left: 0,
-            right: 0,
-            bottom: 30,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InformationsCard(
-                  information: character.race,
-                  icon: Icons.groups_2_outlined,
-                ),
-                const SizedBox(width: 20),
-                InformationsCard(
-                  information: hitPoints.toInt().toString(),
-                  icon: Icons.favorite_border,
-                ),
-              ],
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: Container(
+              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InformationsCard(
+                    information: character.race,
+                    icon: Icons.groups_2_outlined,
+                  ),
+                  const SizedBox(width: 20),
+                  InformationsCard(
+                    information: hitPoints.toInt().toString(),
+                    icon: Icons.favorite_border,
+                  ),
+                ],
+              ),
             ),
           )
         ],
