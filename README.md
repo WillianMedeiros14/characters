@@ -14,20 +14,28 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
 ## ✅ Funcionalidades existentes
 
+- Alterar a visualização entre Lista e Slider;
 - Visualizar lista de personagens;
+- Visualizar Slider de personagens;
 - Aumentar e dimunuir pontos de vida do personagm;
-- Botão de fazer a lista aparecer e desaparecer;
-- Criar novo personagem.
+- Botão de fazer os personages aparecer e desaparecer;
+- Visualizar detalhes do personagem;
+- Criar novo personagem;
+- Editar personagem;
+- Deletar personagem.
 
 <br>
 
 ## ✅ Resultado do projeto
 
 <h1 align="center">
-  <img alt="Characters" title="Characters" src="assets/home.png" width=230/>
-  <img alt="New Characters" title="New Characters" src="assets/2.png" width=230/>
-  <img alt="New Characters Message" title="New Characters Message" src="assets/3.png" width=230/>
-    <img alt="New Characters list" title="ChaNew Characters listracters" src="assets/4.png" width=230/>
+  <img alt="Characters" title="Characters" src="assets/list.png" width=230/>
+  <img alt="Change view" title="Change view" src="assets/changeView.png" width=230/>
+  <img alt="Characters" title="Characters" src="assets/slider1.png" width=230/>
+  <img alt="Characters" title="Characters" src="assets/slider2.png" width=230/>
+  <img alt="New Characters" title="New Characters" src="assets/new.png" width=230/>
+  <img alt="Details" title="Details" src="assets/details.png" width=230/>
+  <img alt="Edit" title="Edit" src="assets/edit.png" width=230/>
 </h1>
 
 <br>
@@ -60,3 +68,4 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 - **[Flutter](https://flutter.dev/)**.
 - **[MobX](https://mobx.netlify.app/)**.
 - **[Provider](https://pub.dev/packages/provider)**.
+- **[Sqflite](https://pub.dev/packages/sqflite)**.

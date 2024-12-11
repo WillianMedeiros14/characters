@@ -39,8 +39,8 @@ class FloatingActionButtonOptionWidget extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(16),
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(16),
                       ),
                       onPressed: onChangeOpacity,
                       child: opacityLevel == 1.0
