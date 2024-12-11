@@ -5,19 +5,14 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final double opacityLevel;
+  const HomePage({super.key, required this.opacityLevel});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  double opacityLevel = 1.0;
-
-  void _changeOpacity() {
-    setState(() => opacityLevel = opacityLevel == 0 ? 1.0 : 0.0);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -36,7 +31,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: AnimatedOpacity(
-        opacity: opacityLevel,
+        opacity: widget.opacityLevel,
         duration: const Duration(microseconds: 600),
         child: ListView(
           children: [

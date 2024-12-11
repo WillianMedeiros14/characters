@@ -35,7 +35,11 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: _showFirstPage ? const HomePage() : const HomeSliderPage(),
+        body: _showFirstPage
+            ? HomePage(
+                opacityLevel: opacityLevel,
+              )
+            : HomeSliderPage(opacityLevel: opacityLevel),
         floatingActionButton: FloatingActionButtonOptionWidget(
           onChangeOpacity: _changeOpacity,
           opacityLevel: opacityLevel,
