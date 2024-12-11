@@ -175,10 +175,6 @@ class _HomeSliderPageState extends State<HomeSliderPage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButtonOptionWidget(
-        onChangeOpacity: _changeOpacity,
-        opacityLevel: opacityLevel,
-      ),
     );
   }
 }

@@ -1,14 +1,11 @@
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/home/presentation/widgets/personagem_card_widget.dart';
-import 'package:alura_quest/shared/widgets/floating_action_button_option_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,8 +22,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    final charactersStore =
-        Provider.of<CharactersStore>(context, listen: false);
+    final charactersStore = Provider.of<CharactersStore>(
+      context,
+      listen: false,
+    );
     charactersStore.initializeCharacters();
   }
 
@@ -36,10 +35,6 @@ class _HomePageState extends State<HomePage> {
         Provider.of<CharactersStore>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
       body: AnimatedOpacity(
         opacity: opacityLevel,
         duration: const Duration(microseconds: 600),
@@ -72,10 +67,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButtonOptionWidget(
-        onChangeOpacity: _changeOpacity,
-        opacityLevel: opacityLevel,
       ),
     );
   }
