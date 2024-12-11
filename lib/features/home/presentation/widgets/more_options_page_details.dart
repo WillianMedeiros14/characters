@@ -49,14 +49,14 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
     }
 
     void _editCharacter() {
-      print("Ia para tela de edição/criação");
       Navigator.pop(context);
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => const CharacterCreationPage(),
-            settings:
-                RouteSettings(arguments: {'character': widget.character})),
+          builder: (context) => CharacterCreationPage(
+            character: widget.character,
+          ),
+        ),
       );
     }
 

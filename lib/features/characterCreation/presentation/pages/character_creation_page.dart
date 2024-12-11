@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 class CharacterCreationPage extends StatefulWidget {
   final CharacterModel? character;
+
   const CharacterCreationPage({super.key, this.character});
 
   @override
@@ -21,6 +22,8 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
   final _inputUrlImageController = TextEditingController();
   final _inputDescriptionController = TextEditingController();
 
+  late CharacterModel character;
+
   @override
   void dispose() {
     _inputNameController.dispose();
@@ -31,35 +34,24 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.character != null) {
+      character = widget.character!;
+
+      _inputNameController.text = character.name;
+      _inputRaceController.text = character.race;
+      _inputStrengthController.text = character.strength.toString();
+      _inputUrlImageController.text = character.url;
+      _inputDescriptionController.text = character.description;
+    }
+  }
+
   void _realTimeValidation() {
     _formKey.currentState!.validate();
     setState(() {});
-  }
-
-  late CharacterModel? character;
-
-  late double hitPoints = 100;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    if (args != null && args.containsKey('character')) {
-      character = args['character'] as CharacterModel;
-
-      if (character != null) {
-        _inputNameController.text = character!.name;
-        _inputRaceController.text = character!.race;
-        _inputStrengthController.text = character!.strength.toString();
-        _inputUrlImageController.text = character!.url;
-        _inputDescriptionController.text = character!.description;
-      }
-    } else {
-      print("Personagem não passado");
-    }
   }
 
   @override
@@ -71,7 +63,7 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          character != null ? "Edição de personagem" : "Novo personagem",
+          widget.character != null ? "Edição de personagem" : "Novo personagem",
           style: const TextStyle(
             fontSize: 22,
             color: Colors.black,
@@ -173,8 +165,9 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                             borderRadius: BorderRadius.circular(8),
                             color: const Color.fromARGB(255, 255, 255, 255),
                             image: DecorationImage(
-                              image:
-                                  NetworkImage(_inputUrlImageController.text),
+                              image: NetworkImage(
+                                _inputUrlImageController.text,
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -188,53 +181,57 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       CharacterModel newCharacter = CharacterModel(
-                          name: _inputNameController.text,
-                          race: _inputRaceController.text,
-                          url: _inputUrlImageController.text,
-                          strength: int.parse(_inputStrengthController.text),
-                          description: _inputDescriptionController.text);
+                        name: _inputNameController.text,
+                        race: _inputRaceController.text,
+                        url: _inputUrlImageController.text,
+                        strength: int.parse(_inputStrengthController.text),
+                        description: _inputDescriptionController.text,
+                      );
 
                       final bool? result;
-                      if (character == null) {
-                        result =
-                            await charactersStore.addNewCharacter(newCharacter);
+                      if (widget.character == null) {
+                        result = await charactersStore.addNewCharacter(
+                          newCharacter,
+                        );
                       } else {
-                        newCharacter.id = character!.id;
+                        newCharacter.id = widget.character!.id;
                         result = await charactersStore.editCharacter(
-                            character: newCharacter);
+                          character: newCharacter,
+                        );
                       }
 
                       if (result == true) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: Color.fromARGB(255, 25, 149, 81),
+                            backgroundColor:
+                                const Color.fromARGB(255, 25, 149, 81),
                             content: Text(
-                              'Personagem ${character != null ? "editado" : "criado"} com suceso',
-                              style: TextStyle(color: Colors.white),
+                              'Personagem ${widget.character != null ? "editado" : "criado"} com sucesso',
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         );
 
-                        if (character != null) {
+                        if (widget.character != null) {
                           Navigator.popUntil(context, (route) => route.isFirst);
 
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const CharacterDetailsPage(),
-                              settings: RouteSettings(
-                                arguments: {'character': newCharacter},
+                              builder: (context) => CharacterDetailsPage(
+                                character: newCharacter,
                               ),
                             ),
                           );
+                        } else {
+                          Navigator.pop(context);
                         }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: Color.fromARGB(255, 225, 68, 10),
                             content: Text(
-                              'Erro ao ${character != null ? "editar" : "inserir"} personagem',
+                              'Erro ao ${widget.character != null ? "editar" : "inserir"} personagem',
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -250,10 +247,10 @@ class _CharacterCreationPageState extends State<CharacterCreationPage> {
                     ),
                   ),
                   child: Text(
-                    character != null ? 'Salvar edição' : 'Salvar',
+                    widget.character != null ? 'Salvar edição' : 'Salvar',
                     style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
-                )
+                ),
               ],
             ),
           ),

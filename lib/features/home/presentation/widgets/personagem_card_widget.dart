@@ -152,9 +152,8 @@ class _PersonagemCardWidgetState extends State<PersonagemCardWidget> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CharacterDetailsPage(),
-              settings: RouteSettings(
-                arguments: {'character': widget.character},
+              builder: (context) => CharacterDetailsPage(
+                character: widget.character,
               ),
             ),
           )

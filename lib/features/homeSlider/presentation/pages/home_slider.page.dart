@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/home/presentation/pages/character_details_page.dart';
 import 'package:alura_quest/features/home/presentation/widgets/strength_start_widget.dart';
@@ -93,10 +92,7 @@ class _HomeSliderPageState extends State<HomeSliderPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const CharacterDetailsPage(),
-                              settings: RouteSettings(
-                                arguments: {'character': character},
-                              ),
+                                  CharacterDetailsPage(character: character),
                             ),
                           );
                         },

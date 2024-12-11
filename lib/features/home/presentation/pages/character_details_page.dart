@@ -8,32 +8,16 @@ import 'package:alura_quest/shared/widgets/line_vertical.dart';
 import 'package:flutter/material.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
-  final CharacterModel? character;
+  final CharacterModel character;
 
-  const CharacterDetailsPage({super.key, this.character});
+  const CharacterDetailsPage({super.key, required this.character});
 
   @override
   State<CharacterDetailsPage> createState() => _CharacterDetailsPageState();
 }
 
 class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
-  late CharacterModel character;
-
   late double hitPoints = 100;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    if (args != null && args.containsKey('character')) {
-      character = args['character'] as CharacterModel;
-    } else {
-      print("Personagem não passado");
-    }
-  }
 
   void _changeHitPointsUp() {
     setState(() {
@@ -68,9 +52,9 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
           ),
         ),
         actions: [
-          if (character != null && character.id > 0)
+          if (widget.character.id > 0)
             MoreOptionsPageDetails(
-              character: character,
+              character: widget.character,
             ),
           const SizedBox(
             width: 5,
@@ -97,7 +81,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
                               color: const Color.fromARGB(255, 255, 255, 255),
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  character.url,
+                                  widget.character.url,
                                 ),
                                 fit: BoxFit.cover,
                               ),
@@ -113,7 +97,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          character.name,
+                          widget.character.name,
                           style: const TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.w500,
@@ -124,7 +108,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             StrengthStartWidget(
-                              strength: character.strength,
+                              strength: widget.character.strength,
                               sizeIcon: 25,
                             ),
                             Column(
@@ -146,7 +130,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
                         ),
                         const LineVertical(),
                         Text(
-                          character.description,
+                          widget.character.description,
                           style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w400,
@@ -177,7 +161,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InformationsCard(
-                    information: character.race,
+                    information: widget.character.race,
                     icon: Icons.groups_2_outlined,
                   ),
                   const SizedBox(width: 20),
