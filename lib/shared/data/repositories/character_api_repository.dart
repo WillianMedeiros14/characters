@@ -84,19 +84,11 @@ class CharacterApiRepository implements ICharacterRepository {
   @override
   Future<bool> deleteCharacterById({required int characterId}) async {
     try {
-      final Database db = await _getDatabase();
-
-      int result = await db.delete(
-        TABLE_NAME,
-        where: "id = ?",
-        whereArgs: [characterId],
+      final response = await client.deleteCharacter(
+        endpoint: "/Character/${characterId}",
       );
 
-      if (result > 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return true;
     } catch (ex) {
       print(ex);
       return false;
