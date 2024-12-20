@@ -20,7 +20,7 @@ class CharacterModel {
       name: map['name'],
       description: map['description'],
       race: map['race'],
-      url: map['url'],
+      url: map['urlImage'],
       strength: map['strength'],
     );
   }
@@ -29,7 +29,17 @@ class CharacterModel {
     return {
       'name': name,
       'race': race,
-      'url': url,
+      'urlImage': url,
+      'strength': strength,
+      'description': description,
+    };
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'race': race,
+      'urlImage': url,
       'strength': strength,
       'description': description,
     };

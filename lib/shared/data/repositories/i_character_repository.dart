@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 abstract class ICharacterRepository {
   Future<Database> _getDatabase();
-  Future createCharacter({required CharacterModel character});
+  Future<CharacterModel?> createCharacter({required CharacterModel character});
   Future<List<CharacterModel>?> getAllCharacters();
   Future<bool> deleteCharacterById({required int characterId});
   Future<bool> editCharacter({required CharacterModel character});

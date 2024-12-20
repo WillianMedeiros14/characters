@@ -8,22 +8,22 @@ import 'package:path/path.dart' as p;
 
 class CharacterRepository implements ICharacterRepository {
   @override
-  Future<int?> createCharacter({required CharacterModel character}) async {
-    try {
-      final Database db = await _getDatabase();
+  // Future<int?> createCharacter({required CharacterModel character}) async {
+  //   try {
+  //     final Database db = await _getDatabase();
 
-      final result = await db.insert(
-        TABLE_NAME,
-        character.toMap(),
-      );
+  //     final result = await db.insert(
+  //       TABLE_NAME,
+  //       character.toMap(),
+  //     );
 
-      return result;
-    } catch (ex) {
-      print("Erro ao criar ");
-      print(ex);
-      return null;
-    }
-  }
+  //     return result;
+  //   } catch (ex) {
+  //     print("Erro ao criar ");
+  //     print(ex);
+  //     return null;
+  //   }
+  // }
 
   @override
   Future<List<CharacterModel>?> getAllCharacters() async {
@@ -99,5 +99,11 @@ class CharacterRepository implements ICharacterRepository {
       print(ex);
       return false;
     }
+  }
+
+  @override
+  Future<CharacterModel?> createCharacter({required CharacterModel character}) {
+    // TODO: implement createCharacter
+    throw UnimplementedError();
   }
 }
