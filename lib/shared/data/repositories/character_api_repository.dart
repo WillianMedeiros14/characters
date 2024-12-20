@@ -25,26 +25,10 @@ class CharacterApiRepository implements ICharacterRepository {
 
       return characterCreated;
     } else if (response.statusCode == 404) {
-      // throw NotFoundException('A url informada não é válida');
       return null;
     } else {
-      // throw Exception('Não foi possível criar o pedido');
       return null;
     }
-    // try {
-    //   final Database db = await _getDatabase();
-
-    //   final result = await db.insert(
-    //     TABLE_NAME,
-    //     character.toMap(),
-    //   );
-
-    //   return result;
-    // } catch (ex) {
-    //   print("Erro ao criar ");
-    //   print(ex);
-    //   return null;
-    // }
   }
 
   @override
