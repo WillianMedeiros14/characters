@@ -72,11 +72,11 @@ abstract class _CharactersStore with Store {
     final result =
         await characterRepository.editCharacter(character: character);
 
-    if (result == true) {
+    if (result != null) {
       final index = characterList.indexWhere((c) => c.id == character.id);
 
       if (index != -1) {
-        characterList[index] = character;
+        characterList[index] = result;
         return true;
       } else {
         return false;

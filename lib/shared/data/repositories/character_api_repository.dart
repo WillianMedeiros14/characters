@@ -104,27 +104,19 @@ class CharacterApiRepository implements ICharacterRepository {
   }
 
   @override
-  Future<bool> editCharacter({required CharacterModel character}) async {
+  Future<CharacterModel?> editCharacter({
+    required CharacterModel character,
+  }) async {
     try {
-      final Database db = await _getDatabase();
-
-      int result = await db.update(
-        TABLE_NAME,
-        character.toMap(),
-        where: "id = ?",
-        whereArgs: [character.id],
+      final response = await client.updateCharacter(
+        endpoint: "/Character/${character.id}",
+        data: character.toJson(),
       );
 
-      print("result");
-      print(result);
-      if (result > 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return character;
     } catch (ex) {
       print(ex);
-      return false;
+      return null;
     }
   }
 }

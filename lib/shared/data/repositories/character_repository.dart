@@ -76,34 +76,40 @@ class CharacterRepository implements ICharacterRepository {
     }
   }
 
-  @override
-  Future<bool> editCharacter({required CharacterModel character}) async {
-    try {
-      final Database db = await _getDatabase();
+  // @override
+  // Future<bool> editCharacter({required CharacterModel character}) async {
+  //   try {
+  //     final Database db = await _getDatabase();
 
-      int result = await db.update(
-        TABLE_NAME,
-        character.toMap(),
-        where: "id = ?",
-        whereArgs: [character.id],
-      );
+  //     int result = await db.update(
+  //       TABLE_NAME,
+  //       character.toMap(),
+  //       where: "id = ?",
+  //       whereArgs: [character.id],
+  //     );
 
-      print("result");
-      print(result);
-      if (result > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    } catch (ex) {
-      print(ex);
-      return false;
-    }
-  }
+  //     print("result");
+  //     print(result);
+  //     if (result > 0) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (ex) {
+  //     print(ex);
+  //     return false;
+  //   }
+  // }
 
   @override
   Future<CharacterModel?> createCharacter({required CharacterModel character}) {
     // TODO: implement createCharacter
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<CharacterModel?> editCharacter({required CharacterModel character}) {
+    // TODO: implement editCharacter
     throw UnimplementedError();
   }
 }

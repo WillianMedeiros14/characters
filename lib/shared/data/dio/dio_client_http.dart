@@ -6,6 +6,10 @@ abstract class IHttpCharacterClient {
     required String endpoint,
     required Map<String, dynamic> data,
   });
+  Future updateCharacter({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  });
 }
 
 class DioClientHttp implements IHttpCharacterClient {
@@ -28,6 +32,15 @@ class DioClientHttp implements IHttpCharacterClient {
     required Map<String, dynamic> data,
   }) async {
     final response = await dio.post(endpoint, data: data);
+    return response;
+  }
+
+  @override
+  Future updateCharacter({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  }) async {
+    final response = await dio.put(endpoint, data: data);
     return response;
   }
 }
