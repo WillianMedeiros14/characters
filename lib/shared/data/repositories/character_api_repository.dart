@@ -3,15 +3,14 @@ import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
 import 'package:alura_quest/shared/errors/exceptions.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
 import 'package:alura_quest/shared/data/repositories/i_character_repository.dart';
-import 'package:alura_quest/shared/data/constants/sqlite/CREATE_CHARACTER_TABLE_SCRIPT.dart';
-
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart' as p;
 
 class CharacterApiRepository implements ICharacterRepository {
   final IHttpCharacterClient client;
 
-  CharacterApiRepository({required this.client});
+  CharacterApiRepository({
+    required this.client,
+  });
+
   @override
   Future<CharacterModel?> createCharacter(
       {required CharacterModel character}) async {
@@ -45,31 +44,23 @@ class CharacterApiRepository implements ICharacterRepository {
 
         return characters;
       } else if (response.statusCode == 404) {
-        throw NotFoundException('A URL informada não é válida');
+        NotFoundException('A URL informada não é válida');
+        return null;
       } else {
-        throw Exception('Não foi possível carregar os personagens');
+        Exception('Não foi possível carregar os personagens');
+        return null;
       }
     } catch (e) {
-      throw Exception('Erro ao carregar os personagens: $e');
+      Exception('Erro ao carregar os personagens: $e');
+      return null;
     }
-  }
-
-  @override
-  Future<Database> _getDatabase() async {
-    return openDatabase(
-      p.join(await getDatabasesPath(), TABLE_NAME),
-      onCreate: (db, version) {
-        return db.execute(CREATE_CHARACTER_TABLE_SCRIPT);
-      },
-      version: 1,
-    );
   }
 
   @override
   Future<bool> deleteCharacterById({required int characterId}) async {
     try {
       final response = await client.deleteCharacter(
-        endpoint: "/Character/${characterId}",
+        endpoint: "/Character/$characterId",
       );
 
       return true;
