@@ -19,7 +19,7 @@ class DioClientHttp implements IHttpCharacterClient {
   Dio dio = Dio();
 
   DioClientHttp({Interceptor? interceptors}) {
-    dio.options.baseUrl = 'http://192.168.100.140:8080/';
+    dio.options.baseUrl = 'http://192.168.110.145:8080/';
     if (interceptors != null) {
       dio.interceptors.add(interceptors);
     }
