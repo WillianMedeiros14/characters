@@ -2,6 +2,7 @@ import 'package:alura_quest/features/characterCreation/presentation/widgets/text
 import 'package:alura_quest/features/login/presentation/pages/sign_up_dart.dart';
 import 'package:alura_quest/features/login/presentation/widgets/line_separate_or_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,6 +34,16 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: 230,
+                    child: SvgPicture.asset(
+                      'assets/images/login.svg',
+                      semanticsLabel: 'Dart Logo',
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   const Text(
                     "Bem-vindo",
                     style: TextStyle(
@@ -94,9 +105,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         "Esqueceu a senha?",
                         style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ),
