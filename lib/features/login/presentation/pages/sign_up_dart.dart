@@ -1,19 +1,20 @@
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
-import 'package:alura_quest/features/login/presentation/pages/sign_up_dart.dart';
 import 'package:alura_quest/features/login/presentation/widgets/line_separate_or_widget.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
+  final _inputNameController = TextEditingController();
   final _inputEmailController = TextEditingController();
   final _inputPasswordController = TextEditingController();
+  final _inputPasswordConfirmationController = TextEditingController();
 
   void _realTimeValidation() {
     _formKey.currentState!.validate();
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Bem-vindo",
+                    "Criar conta",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.w600,
@@ -44,13 +45,29 @@ class _LoginPageState extends State<LoginPage> {
                     height: 5,
                   ),
                   const Text(
-                    "Tenha informaçoes sobre os seus personagems favoritos",
+                    "Cadastre-se agora e tenha acesso as informações dos seus personagens favoritos",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(
                     height: 24,
+                  ),
+                  TextFormFieldWidget(
+                    controller: _inputNameController,
+                    labelText: 'Nome',
+                    hintText: 'Insira o seu nome',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Insira o seu nome';
+                      }
+
+                      return null;
+                    },
+                    onChanged: _realTimeValidation,
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   TextFormFieldWidget(
                     controller: _inputEmailController,
@@ -88,17 +105,17 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Center(
-                    child: TextButton(
-                      onPressed: () => {},
-                      child: const Text(
-                        "Esqueceu a senha?",
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ),
-                    ),
+                  TextFormFieldWidget(
+                    controller: _inputPasswordConfirmationController,
+                    labelText: 'Confirme a senha',
+                    hintText: 'Confirme a senha',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Confirme a senha';
+                      }
+                      return null;
+                    },
+                    onChanged: _realTimeValidation,
                   ),
                   const SizedBox(
                     height: 16,
@@ -113,32 +130,29 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     child: const Text(
-                      "Acessar",
+                      "Criar",
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                   const LineSeparateOrWidget(),
-                  ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Já tem uma conta?"),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Acessar",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
                       ),
-                    ),
-                    child: const Text(
-                      "Criar conta",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  ),
+                    ],
+                  )
                 ],
               ),
             ),
