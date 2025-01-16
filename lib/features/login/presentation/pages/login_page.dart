@@ -1,8 +1,15 @@
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
+import 'package:alura_quest/features/login/data/model/login_model.dart';
+import 'package:alura_quest/features/login/data/repositories/login_repository.dart';
 import 'package:alura_quest/features/login/presentation/pages/sign_up_dart.dart';
+import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
 import 'package:alura_quest/features/login/presentation/widgets/line_separate_or_widget.dart';
+import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
+import 'package:alura_quest/shared/data/interceptors/config/dio_interceptor.dart';
+import 'package:alura_quest/shared/data/interceptors/functions/dio_http_log_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,6 +23,9 @@ class _LoginPageState extends State<LoginPage> {
   final _inputEmailController = TextEditingController();
   final _inputPasswordController = TextEditingController();
 
+  late DioHttpLogInterceptor loggerInterceptor;
+  late DioInterceptors dioInterceptors;
+
   void _realTimeValidation() {
     _formKey.currentState!.validate();
     setState(() {});
@@ -23,6 +33,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final LoginStore loginStore = Provider.of<LoginStore>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -116,7 +131,16 @@ class _LoginPageState extends State<LoginPage> {
                     height: 16,
                   ),
                   ElevatedButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        LoginModel dataLogin = LoginModel(
+                          email: _inputEmailController.text,
+                          password: _inputPasswordController.text,
+                        );
+
+                        await loginStore.login(dataLogin);
+                      }
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 25, 149, 81),
                       minimumSize: Size(
@@ -124,10 +148,12 @@ class _LoginPageState extends State<LoginPage> {
                         50,
                       ),
                     ),
-                    child: const Text(
-                      "Acessar",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
+                    child: loginStore.isLoading
+                        ? const CircularProgressIndicator()
+                        : const Text(
+                            "Acessar",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
                   ),
                   const LineSeparateOrWidget(),
                   ElevatedButton(

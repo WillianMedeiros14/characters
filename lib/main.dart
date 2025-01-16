@@ -1,14 +1,17 @@
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
+import 'package:alura_quest/features/login/data/repositories/login_repository.dart';
+import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
 import 'package:alura_quest/features/myApp/presentation/pages/my_app.dart';
 import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
 import 'package:alura_quest/shared/data/interceptors/config/dio_interceptor.dart';
 import 'package:alura_quest/shared/data/interceptors/functions/dio_http_log_interceptor.dart';
 import 'package:alura_quest/shared/data/repositories/character_api_repository.dart';
-import 'package:alura_quest/shared/data/repositories/character_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final loggerInterceptor = DioHttpLogInterceptor();
   final dioInterceptors = DioInterceptors(loggerInterceptor: loggerInterceptor);
   final dioClient = DioClientHttp(
@@ -21,6 +24,11 @@ void main() {
         Provider<CharactersStore>(
           create: (_) => CharactersStore(
             characterRepository: CharacterApiRepository(client: dioClient),
+          ),
+        ),
+        Provider<LoginStore>(
+          create: (_) => LoginStore(
+            loginRepository: LoginRepository(client: dioClient),
           ),
         ),
       ],
