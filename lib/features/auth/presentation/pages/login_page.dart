@@ -1,10 +1,9 @@
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
-import 'package:alura_quest/features/login/data/model/login_model.dart';
-import 'package:alura_quest/features/login/data/repositories/login_repository.dart';
-import 'package:alura_quest/features/login/presentation/pages/sign_up_dart.dart';
-import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
-import 'package:alura_quest/features/login/presentation/widgets/line_separate_or_widget.dart';
-import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
+import 'package:alura_quest/features/auth/data/model/login_model.dart';
+import 'package:alura_quest/features/auth/presentation/pages/sign_up_dart.dart';
+import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
+import 'package:alura_quest/features/auth/presentation/widgets/line_separate_or_widget.dart';
+
 import 'package:alura_quest/shared/data/interceptors/config/dio_interceptor.dart';
 import 'package:alura_quest/shared/data/interceptors/functions/dio_http_log_interceptor.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginStore loginStore = Provider.of<LoginStore>(
+    final AuthStore authStore = Provider.of<AuthStore>(
       context,
       listen: false,
     );
@@ -138,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                           password: _inputPasswordController.text,
                         );
 
-                        await loginStore.login(dataLogin);
+                        await authStore.login(dataLogin);
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -148,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                         50,
                       ),
                     ),
-                    child: loginStore.isLoading
+                    child: authStore.isLoading
                         ? const CircularProgressIndicator()
                         : const Text(
                             "Acessar",

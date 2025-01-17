@@ -1,6 +1,6 @@
-import 'package:alura_quest/features/login/data/model/login_model.dart';
-import 'package:alura_quest/features/login/data/model/login_response_model.dart';
-import 'package:alura_quest/features/login/data/repositories/i_login_repository.dart';
+import 'package:alura_quest/features/auth/data/model/login_model.dart';
+import 'package:alura_quest/features/auth/data/model/login_response_model.dart';
+import 'package:alura_quest/features/auth/data/repositories/i_login_repository.dart';
 
 import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
 

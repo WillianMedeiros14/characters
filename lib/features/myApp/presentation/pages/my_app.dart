@@ -1,7 +1,7 @@
 import 'package:alura_quest/features/home/presentation/pages/home_page.dart';
 import 'package:alura_quest/features/homeSlider/presentation/pages/home_slider.page.dart';
-import 'package:alura_quest/features/login/presentation/pages/login_page.dart';
-import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
+import 'package:alura_quest/features/auth/presentation/pages/login_page.dart';
+import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/shared/widgets/floating_action_button_option_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +9,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -33,10 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final loginStore = Provider.of<LoginStore>(context);
-
-    print("loginStore.isLogged");
-    print(loginStore.isLogged);
+    final loginStore = Provider.of<AuthStore>(context);
 
     return MaterialApp(
       title: 'Alura Quest',

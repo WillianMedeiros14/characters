@@ -1,6 +1,6 @@
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
-import 'package:alura_quest/features/login/data/repositories/login_repository.dart';
-import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
+import 'package:alura_quest/features/auth/data/repositories/login_repository.dart';
+import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/features/myApp/presentation/pages/my_app.dart';
 import 'package:alura_quest/shared/data/dio/dio_client_http.dart';
 import 'package:alura_quest/shared/data/interceptors/config/dio_interceptor.dart';
@@ -26,8 +26,8 @@ void main() async {
             characterRepository: CharacterApiRepository(client: dioClient),
           ),
         ),
-        Provider<LoginStore>(
-          create: (_) => LoginStore(
+        Provider<AuthStore>(
+          create: (_) => AuthStore(
             loginRepository: LoginRepository(client: dioClient),
           ),
         ),

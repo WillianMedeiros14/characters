@@ -1,5 +1,5 @@
 import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
-import 'package:alura_quest/features/login/presentation/stores/login_store.dart';
+import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/features/myApp/presentation/widgets/modal_to_change_page_type_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +22,11 @@ class FloatingActionButtonOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginStore loginStore = Provider.of<LoginStore>(
+    final AuthStore loginStore = Provider.of<AuthStore>(
       context,
       listen: false,
     );
+
     return Stack(
       children: [
         Positioned(
@@ -86,7 +87,7 @@ class FloatingActionButtonOptionWidget extends StatelessWidget {
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 228, 9, 9),
+                        backgroundColor: const Color.fromARGB(255, 228, 9, 9),
                         shape: const CircleBorder(),
                         padding: const EdgeInsets.all(16),
                       ),
@@ -111,8 +112,8 @@ class FloatingActionButtonOptionWidget extends StatelessWidget {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-                        shape: CircleBorder(),
-                        padding: EdgeInsets.all(16),
+                        shape: const CircleBorder(),
+                        padding: const EdgeInsets.all(16),
                       ),
                       onPressed: onChangeOpacity,
                       child: opacityLevel == 1.0

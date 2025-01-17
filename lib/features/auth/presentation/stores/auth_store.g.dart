@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_store.dart';
+part of 'auth_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,9 @@ part of 'login_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$LoginStore on _LoginStore, Store {
+mixin _$AuthStore on _AuthStore, Store {
   late final _$isLoadingAtom =
-      Atom(name: '_LoginStore.isLoading', context: context);
+      Atom(name: '_AuthStore.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -26,7 +26,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$isLoadingTokenAtom =
-      Atom(name: '_LoginStore.isLoadingToken', context: context);
+      Atom(name: '_AuthStore.isLoadingToken', context: context);
 
   @override
   bool get isLoadingToken {
@@ -42,7 +42,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$isLoggedAtom =
-      Atom(name: '_LoginStore.isLogged', context: context);
+      Atom(name: '_AuthStore.isLogged', context: context);
 
   @override
   bool get isLogged {
@@ -58,7 +58,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$loginAsyncAction =
-      AsyncAction('_LoginStore.login', context: context);
+      AsyncAction('_AuthStore.login', context: context);
 
   @override
   Future<dynamic> login(LoginModel dataLogin) {
@@ -66,7 +66,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$saveTokenFromResponseAsyncAction =
-      AsyncAction('_LoginStore.saveTokenFromResponse', context: context);
+      AsyncAction('_AuthStore.saveTokenFromResponse', context: context);
 
   @override
   Future<bool> saveTokenFromResponse(String token) {
@@ -75,7 +75,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$logOutAsyncAction =
-      AsyncAction('_LoginStore.logOut', context: context);
+      AsyncAction('_AuthStore.logOut', context: context);
 
   @override
   Future<void> logOut() {
@@ -83,7 +83,7 @@ mixin _$LoginStore on _LoginStore, Store {
   }
 
   late final _$verifyTokenAsyncAction =
-      AsyncAction('_LoginStore.verifyToken', context: context);
+      AsyncAction('_AuthStore.verifyToken', context: context);
 
   @override
   Future<dynamic> verifyToken() {

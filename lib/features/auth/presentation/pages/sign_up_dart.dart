@@ -1,5 +1,5 @@
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
-import 'package:alura_quest/features/login/presentation/widgets/line_separate_or_widget.dart';
+import 'package:alura_quest/features/auth/presentation/widgets/line_separate_or_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

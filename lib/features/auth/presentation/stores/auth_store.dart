@@ -1,17 +1,17 @@
-import 'package:alura_quest/features/login/data/model/login_model.dart';
-import 'package:alura_quest/features/login/data/repositories/login_repository.dart';
+import 'package:alura_quest/features/auth/data/model/login_model.dart';
+import 'package:alura_quest/features/auth/data/repositories/login_repository.dart';
 
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'login_store.g.dart';
+part 'auth_store.g.dart';
 
-class LoginStore = _LoginStore with _$LoginStore;
+class AuthStore = _AuthStore with _$AuthStore;
 
-abstract class _LoginStore with Store {
+abstract class _AuthStore with Store {
   final LoginRepository loginRepository;
 
-  _LoginStore({required this.loginRepository}) {
+  _AuthStore({required this.loginRepository}) {
     verifyToken();
   }
 
