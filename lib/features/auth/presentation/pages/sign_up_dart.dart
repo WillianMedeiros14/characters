@@ -1,7 +1,12 @@
+import 'package:alura_quest/features/auth/data/model/signUp_model.dart';
+import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/features/characterCreation/presentation/widgets/textForm_field_widget.dart';
 import 'package:alura_quest/features/auth/presentation/widgets/line_separate_or_widget.dart';
+import 'package:alura_quest/features/myApp/presentation/pages/my_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -24,6 +29,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthStore authStore = Provider.of<AuthStore>(
+      context,
+      listen: false,
+    );
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
@@ -131,20 +141,50 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  ElevatedButton(
-                    onPressed: () async {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 25, 149, 81),
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width,
-                        50,
+                  Observer(builder: (_) {
+                    return ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          SignUpModel dataSignUp = SignUpModel(
+                            username: _inputNameController.text,
+                            email: _inputEmailController.text,
+                            password: _inputPasswordController.text,
+                            rePassword:
+                                _inputPasswordConfirmationController.text,
+                          );
+
+                          bool isSuccess = await authStore.signUp(dataSignUp);
+                          if (isSuccess) {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const MyApp(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Erro ao criar usuário."),
+                              ),
+                            );
+                          }
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 25, 149, 81),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width,
+                          50,
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      "Criar",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                  ),
+                      child: authStore.isLoading
+                          ? const CircularProgressIndicator()
+                          : const Text(
+                              "Criar",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                    );
+                  }),
                   const LineSeparateOrWidget(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -19,6 +19,11 @@ abstract class IHttpCharacterClient {
     required String endpoint,
     required Map<String, dynamic> data,
   });
+
+  Future signUp({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  });
 }
 
 class DioClientHttp implements IHttpCharacterClient {
@@ -67,6 +72,15 @@ class DioClientHttp implements IHttpCharacterClient {
 
   @override
   Future login({
+    required String endpoint,
+    required Map<String, dynamic> data,
+  }) async {
+    final response = await dio.post(endpoint, data: data);
+    return response;
+  }
+
+  @override
+  Future signUp({
     required String endpoint,
     required Map<String, dynamic> data,
   }) async {

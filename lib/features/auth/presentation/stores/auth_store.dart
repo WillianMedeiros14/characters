@@ -1,5 +1,6 @@
 import 'package:alura_quest/features/auth/data/model/login_model.dart';
-import 'package:alura_quest/features/auth/data/repositories/login_repository.dart';
+import 'package:alura_quest/features/auth/data/model/signUp_model.dart';
+import 'package:alura_quest/features/auth/data/repositories/auth_repository.dart';
 
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,9 +10,9 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStore with _$AuthStore;
 
 abstract class _AuthStore with Store {
-  final LoginRepository loginRepository;
+  final AuthRepository authRepository;
 
-  _AuthStore({required this.loginRepository}) {
+  _AuthStore({required this.authRepository}) {
     verifyToken();
   }
 
@@ -27,7 +28,7 @@ abstract class _AuthStore with Store {
   @action
   Future login(LoginModel dataLogin) async {
     isLoading = true;
-    final result = await loginRepository.login(dataLogin: dataLogin);
+    final result = await authRepository.login(dataLogin: dataLogin);
     isLoading = false;
     if (result != null) {
       bool isValueSavedToken = await saveTokenFromResponse(result.token);
@@ -39,6 +40,25 @@ abstract class _AuthStore with Store {
       return true;
     } else {
       print("Erro ao fazer login");
+    }
+  }
+
+  @action
+  Future signUp(SignUpModel dataSignUp) async {
+    isLoading = true;
+    final result = await authRepository.signUp(dataSignUp: dataSignUp);
+    isLoading = false;
+    if (result != null) {
+      bool isValueSavedToken = await saveTokenFromResponse(result.token);
+
+      if (isValueSavedToken) {
+        isLogged = true;
+      }
+
+      return true;
+    } else {
+      print("Erro ao criar usuário");
+      return false;
     }
   }
 

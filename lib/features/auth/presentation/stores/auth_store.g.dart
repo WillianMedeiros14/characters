@@ -65,6 +65,14 @@ mixin _$AuthStore on _AuthStore, Store {
     return _$loginAsyncAction.run(() => super.login(dataLogin));
   }
 
+  late final _$signUpAsyncAction =
+      AsyncAction('_AuthStore.signUp', context: context);
+
+  @override
+  Future<dynamic> signUp(SignUpModel dataSignUp) {
+    return _$signUpAsyncAction.run(() => super.signUp(dataSignUp));
+  }
+
   late final _$saveTokenFromResponseAsyncAction =
       AsyncAction('_AuthStore.saveTokenFromResponse', context: context);
 
