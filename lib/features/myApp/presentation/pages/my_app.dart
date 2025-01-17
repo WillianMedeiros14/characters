@@ -46,40 +46,64 @@ class _MyAppState extends State<MyApp> {
         builder: (_) {
           if (loginStore.isLogged) {
             return Scaffold(
-              appBar: AppBar(
-                actions: [
-                  Builder(
-                    builder: (context) => IconButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const ProfilePage(),
-                          ),
-                        );
-                      },
-                      icon: Container(
-                        padding: const EdgeInsets.all(5),
-                        margin: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 0,
+              body: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                      left: 16,
+                      right: 16,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "Crie, explore e se conecte com personagens incríveis!",
+                            style: TextStyle(
+                              fontSize: 26,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            softWrap: true,
                           ),
                         ),
-                        child: const Icon(
-                          Icons.person,
-                          size: 35,
-                          color: Colors.black,
+                        const SizedBox(width: 30),
+                        Builder(
+                          builder: (BuildContext context) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ProfilePage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                shape: const CircleBorder(),
+                              ),
+                              child: ClipOval(
+                                child: Image.network(
+                                  'https://github.com/WillianMedeiros14.png',
+                                  width: 75,
+                                  height: 75,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                      ),
+                      ],
                     ),
                   ),
+                  HomePage(
+                    opacityLevel: opacityLevel,
+                    showFirstPage: _showFirstPage,
+                  )
                 ],
               ),
-              body: _showFirstPage
-                  ? HomePage(opacityLevel: opacityLevel)
-                  : HomeSliderPage(opacityLevel: opacityLevel),
               floatingActionButton: FloatingActionButtonOptionWidget(
                 onChangeOpacity: _changeOpacity,
                 opacityLevel: opacityLevel,

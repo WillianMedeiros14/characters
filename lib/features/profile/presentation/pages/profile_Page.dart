@@ -32,13 +32,13 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 150,
               fit: BoxFit.cover,
             ),
-            Text(
-              authStore.user!.userName,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            // Text(
+            //   authStore.user!.userName,
+            //   style: const TextStyle(
+            //     fontSize: 24,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
             const SizedBox(
               height: 30,
             ),
