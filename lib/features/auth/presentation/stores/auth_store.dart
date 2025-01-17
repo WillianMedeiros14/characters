@@ -1,6 +1,7 @@
 import 'package:alura_quest/features/auth/data/model/login_model.dart';
 import 'package:alura_quest/features/auth/data/model/signUp_model.dart';
 import 'package:alura_quest/features/auth/data/repositories/auth_repository.dart';
+import 'package:alura_quest/shared/model/user_model.dart';
 
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,9 @@ abstract class _AuthStore with Store {
   _AuthStore({required this.authRepository}) {
     verifyToken();
   }
+
+  @observable
+  UserModel? user;
 
   @observable
   bool isLoading = false;
@@ -32,6 +36,7 @@ abstract class _AuthStore with Store {
     isLoading = false;
     if (result != null) {
       bool isValueSavedToken = await saveTokenFromResponse(result.token);
+      user = result.user;
 
       if (isValueSavedToken) {
         isLogged = true;
@@ -50,6 +55,8 @@ abstract class _AuthStore with Store {
     isLoading = false;
     if (result != null) {
       bool isValueSavedToken = await saveTokenFromResponse(result.token);
+
+      user = result.user;
 
       if (isValueSavedToken) {
         isLogged = true;

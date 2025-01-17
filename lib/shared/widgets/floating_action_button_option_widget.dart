@@ -82,21 +82,6 @@ class FloatingActionButtonOptionWidget extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 228, 9, 9),
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(16),
-                      ),
-                      onPressed: () => {loginStore.logOut()},
-                      child: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                      ),
-                    ),
                   ],
                 )
               : Row(

@@ -155,10 +155,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                           bool isSuccess = await authStore.signUp(dataSignUp);
                           if (isSuccess) {
-                            Navigator.of(context).pushReplacement(
+                            Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                 builder: (context) => const MyApp(),
                               ),
+                              (Route<dynamic> route) => false,
                             );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
