@@ -26,19 +26,21 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.network(
-              'https://cdn-icons-png.flaticon.com/512/9195/9195970.png',
-              width: 150,
-              height: 150,
-              fit: BoxFit.cover,
+            ClipOval(
+              child: Image.network(
+                'https://pbs.twimg.com/media/FKNlhKZUcAEd7FY?format=jpg&name=4096x4096',
+                width: 150,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
             ),
-            // Text(
-            //   authStore.user!.userName,
-            //   style: const TextStyle(
-            //     fontSize: 24,
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
+            Text(
+              authStore.user!.userName,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(
               height: 30,
             ),

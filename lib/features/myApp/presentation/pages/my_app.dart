@@ -46,63 +46,69 @@ class _MyAppState extends State<MyApp> {
         builder: (_) {
           if (loginStore.isLogged) {
             return Scaffold(
-              body: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      top: 16,
-                      left: 16,
-                      right: 16,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Expanded(
-                          child: Text(
-                            "Crie, explore e se conecte com personagens incríveis!",
-                            style: TextStyle(
-                              fontSize: 26,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                        top: 16,
+                        left: 16,
+                        right: 16,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              "Crie, explore e se conecte com personagens incríveis!",
+                              style: TextStyle(
+                                fontSize: 26,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              softWrap: true,
                             ),
-                            softWrap: true,
                           ),
-                        ),
-                        const SizedBox(width: 30),
-                        Builder(
-                          builder: (BuildContext context) {
-                            return ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const ProfilePage(),
-                                  ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.zero,
-                                shape: const CircleBorder(),
-                              ),
-                              child: ClipOval(
-                                child: Image.network(
-                                  'https://github.com/WillianMedeiros14.png',
-                                  width: 75,
-                                  height: 75,
-                                  fit: BoxFit.cover,
+                          const SizedBox(width: 30),
+                          Builder(
+                            builder: (BuildContext context) {
+                              return ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ProfilePage(),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  shape: const CircleBorder(),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                                child: ClipOval(
+                                  child: Image.network(
+                                    'https://github.com/WillianMedeiros14.png',
+                                    width: 75,
+                                    height: 75,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  HomePage(
-                    opacityLevel: opacityLevel,
-                    showFirstPage: _showFirstPage,
-                  )
-                ],
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    HomePage(
+                      opacityLevel: opacityLevel,
+                      showFirstPage: _showFirstPage,
+                    )
+                  ],
+                ),
               ),
               floatingActionButton: FloatingActionButtonOptionWidget(
                 onChangeOpacity: _changeOpacity,
