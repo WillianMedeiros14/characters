@@ -1,4 +1,6 @@
+import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/features/home/presentation/pages/home_page.dart';
+import 'package:alura_quest/features/home/presentation/pages/search.dart';
 import 'package:alura_quest/features/homeSlider/presentation/pages/home_slider.page.dart';
 import 'package:alura_quest/features/auth/presentation/pages/login_page.dart';
 import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
@@ -19,6 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _showFirstPage = true;
+  final controllerSearchInput = TextEditingController();
 
   _togglePage(bool value) {
     setState(() {
@@ -36,8 +39,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     final loginStore = Provider.of<AuthStore>(context);
 
+    final characterStore = Provider.of<CharactersStore>(context);
+
     return MaterialApp(
-      title: 'Alura Quest',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -47,67 +51,81 @@ class _MyAppState extends State<MyApp> {
           if (loginStore.isLogged) {
             return Scaffold(
               backgroundColor: Colors.white,
-              body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(
-                        top: 16,
-                        left: 16,
-                        right: 16,
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Expanded(
-                            child: Text(
-                              "Crie, explore e se conecte com personagens incríveis!",
-                              style: TextStyle(
-                                fontSize: 26,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          top: 16,
+                          left: 16,
+                          right: 16,
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Expanded(
+                              child: Text(
+                                "Crie, explore e se conecte com personagens incríveis!",
+                                style: TextStyle(
+                                  fontSize: 26,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                softWrap: true,
                               ),
-                              softWrap: true,
                             ),
-                          ),
-                          const SizedBox(width: 30),
-                          Builder(
-                            builder: (BuildContext context) {
-                              return ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const ProfilePage(),
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  shape: const CircleBorder(),
-                                ),
-                                child: ClipOval(
-                                  child: Image.network(
-                                    'https://github.com/WillianMedeiros14.png',
-                                    width: 75,
-                                    height: 75,
-                                    fit: BoxFit.cover,
+                            const SizedBox(width: 30),
+                            Builder(
+                              builder: (BuildContext context) {
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProfilePage(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                    shape: const CircleBorder(),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                                  child: ClipOval(
+                                    child: Image.network(
+                                      'https://github.com/WillianMedeiros14.png',
+                                      width: 75,
+                                      height: 75,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    HomePage(
-                      opacityLevel: opacityLevel,
-                      showFirstPage: _showFirstPage,
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 20,
+                          right: 16,
+                          left: 16,
+                          top: 20,
+                        ),
+                        child: Search(
+                          controllerSearchInput: controllerSearchInput,
+                          onSearch: (value) {
+                            characterStore.searchCharacters(searchValue: value);
+                          },
+                        ),
+                      ),
+                      HomePage(
+                        opacityLevel: opacityLevel,
+                        showFirstPage: _showFirstPage,
+                      )
+                    ],
+                  ),
                 ),
               ),
               floatingActionButton: FloatingActionButtonOptionWidget(

@@ -25,6 +25,23 @@ mixin _$CharactersStore on _CharactersStore, Store {
     });
   }
 
+  late final _$searchCharacterListAllAtom =
+      Atom(name: '_CharactersStore.searchCharacterListAll', context: context);
+
+  @override
+  List<CharacterModel> get searchCharacterListAll {
+    _$searchCharacterListAllAtom.reportRead();
+    return super.searchCharacterListAll;
+  }
+
+  @override
+  set searchCharacterListAll(List<CharacterModel> value) {
+    _$searchCharacterListAllAtom
+        .reportWrite(value, super.searchCharacterListAll, () {
+      super.searchCharacterListAll = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: '_CharactersStore.isLoading', context: context);
 
@@ -84,10 +101,20 @@ mixin _$CharactersStore on _CharactersStore, Store {
         .run(() => super.editCharacter(character: character));
   }
 
+  late final _$searchCharactersAsyncAction =
+      AsyncAction('_CharactersStore.searchCharacters', context: context);
+
+  @override
+  Future<void> searchCharacters({required String searchValue}) {
+    return _$searchCharactersAsyncAction
+        .run(() => super.searchCharacters(searchValue: searchValue));
+  }
+
   @override
   String toString() {
     return '''
 characterList: ${characterList},
+searchCharacterListAll: ${searchCharacterListAll},
 isLoading: ${isLoading}
     ''';
   }

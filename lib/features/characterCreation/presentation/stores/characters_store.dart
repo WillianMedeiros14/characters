@@ -17,6 +17,10 @@ abstract class _CharactersStore with Store {
   List<CharacterModel> characterList = ObservableList<CharacterModel>();
 
   @observable
+  List<CharacterModel> searchCharacterListAll =
+      ObservableList<CharacterModel>();
+
+  @observable
   bool isLoading = true;
 
   @action
@@ -29,6 +33,7 @@ abstract class _CharactersStore with Store {
         .toList();
 
     characterList.addAll(dataLocal);
+    searchCharacterListAll = ObservableList.of(characterList);
 
     isLoading = false;
   }
@@ -39,6 +44,8 @@ abstract class _CharactersStore with Store {
 
     if (result != null) {
       characterList.insert(0, result);
+      searchCharacterListAll = ObservableList.of(characterList);
+
       return true;
     } else {
       return false;
@@ -83,6 +90,27 @@ abstract class _CharactersStore with Store {
       }
     } else {
       return false;
+    }
+  }
+
+  @action
+  Future<void> searchCharacters({required String searchValue}) async {
+    try {
+      if (searchValue.isNotEmpty) {
+        final filteredCharacters = searchCharacterListAll.where((character) {
+          final lowerCaseSearch = searchValue.toLowerCase();
+          return character.name.toLowerCase().contains(lowerCaseSearch) ||
+              character.race.toLowerCase().contains(lowerCaseSearch);
+        }).toList();
+
+        characterList
+          ..clear()
+          ..addAll(filteredCharacters);
+      } else {
+        characterList = ObservableList.of(searchCharacterListAll);
+      }
+    } catch (e) {
+      print('Erro ao buscar personagens na lista: $e');
     }
   }
 }
