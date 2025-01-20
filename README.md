@@ -7,13 +7,11 @@
 
 O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de RPG, cujo objetivo é levar estudantes a uma jornada de domínio da linguagem de programação Dart. Os alunos realizam missões, acumulam habilidades e avançam em desafios para se tornarem mestres em Dart. O foco é transformar o aprendizado técnico em uma experiência interativa e envolvente.
 
-## Informações sobre essa branch;
-
-- Todas as informações descritas desta seção em diante são referentes a branch semana_23_WillianMedeiros;
-- Nesta branch as funcionalidades não funcionam com o banco de dados local sem a api, somente com comunicação com a api, sendo assim, antes de rodar, certifique-se de que seu ambiente esteja executando normalmente, tanto com o ip da sua máquina como a api rodando.
 
 ## ✅ Funcionalidades existentes
 
+- Login;
+- Criar conta;
 - Alterar a visualização entre Lista e Slider;
 - Visualizar lista de personagens;
 - Visualizar Slider de personagens;
@@ -21,21 +19,26 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 - Botão de fazer os personages aparecer e desaparecer;
 - Visualizar detalhes do personagem;
 - Criar novo personagem;
+- Pesquisar;
 - Editar personagem;
-- Deletar personagem.
+- Deletar personagem;
+- Perfil;
+- Sair.
 
 <br>
 
 ## ✅ Resultado do projeto
 
 <h1 align="center">
-  <img alt="Characters" title="Characters" src="assets/list.png" width=230/>
-  <img alt="Change view" title="Change view" src="assets/changeView.png" width=230/>
-  <img alt="Characters" title="Characters" src="assets/slider1.png" width=230/>
-  <img alt="Characters" title="Characters" src="assets/slider2.png" width=230/>
-  <img alt="New Characters" title="New Characters" src="assets/new.png" width=230/>
+  <img alt="Login" title="Login" src="assets/login.png" width=230/>
+  <img alt="Characters" title="Characters" src="assets/home.png" width=230/>
+  <img alt="Seach" title="Seach" src="assets/search.png" width=230/>
+  <img alt="Characters" title="Characters" src="assets/slider.png" width=230/>
+  <img alt="New Characters" title="New Characters" src="assets/new.png" width=230>
   <img alt="Details" title="Details" src="assets/details.png" width=230/>
   <img alt="Edit" title="Edit" src="assets/edit.png" width=230/>
+  <img alt="Profile" title="Edit" src="assets/profile.png" width=230/>
+  
 </h1>
 
 <br>
@@ -49,7 +52,7 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
 
 ### Api
 
-- Para o projeto funcionar, é necessário que a api characters_API na branch v1-CRUD esteja executando. Acesse o link abaixo para saber como executar: <br>
+- Para o projeto funcionar, é necessário que a api characters_API na branch main esteja executando. Acesse o link abaixo para saber como executar: <br>
   **[characters_API](https://github.com/WillianMedeiros14/characters_API.git)**
 
 ### Projeto
@@ -61,10 +64,10 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
    cd characters
    ```
 
-2. Acesse a branch semana_23_WillianMedeiros:
+2. Acesse a branch semana_24_WillianMedeiros:
 
    ```bash
-    git checkout semana_23_WillianMedeiros
+    git checkout semana_24_WillianMedeiros
    ```
 
 3. Baixe as dependências:
