@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Text(
-              authStore.user!.userName,
+              authStore.user?.userName ?? '',
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

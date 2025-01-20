@@ -35,7 +35,8 @@ abstract class _AuthStore with Store {
     final result = await authRepository.login(dataLogin: dataLogin);
     isLoading = false;
     if (result != null) {
-      bool isValueSavedToken = await saveTokenFromResponse(result.token);
+      bool isValueSavedToken = await saveTokenFromResponse(
+          token: result.token, userName: result.user.userName);
       user = result.user;
 
       if (isValueSavedToken) {
@@ -54,7 +55,8 @@ abstract class _AuthStore with Store {
     final result = await authRepository.signUp(dataSignUp: dataSignUp);
     isLoading = false;
     if (result != null) {
-      bool isValueSavedToken = await saveTokenFromResponse(result.token);
+      bool isValueSavedToken = await saveTokenFromResponse(
+          token: result.token, userName: result.user.userName);
 
       user = result.user;
 
@@ -70,17 +72,21 @@ abstract class _AuthStore with Store {
   }
 
   @action
-  Future<bool> saveTokenFromResponse(String token) async {
+  Future<bool> saveTokenFromResponse(
+      {required String token, required String userName}) async {
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
 
-      bool success = await sharedPreferences.setString("accessToken", token);
+      bool successAaccessToken =
+          await sharedPreferences.setString("accessToken", token);
+      bool successUserName =
+          await sharedPreferences.setString("userName", userName);
 
-      if (success) {
-        return success;
+      if (successAaccessToken && successUserName) {
+        return true;
       } else {
-        return success;
+        return false;
       }
     } catch (e) {
       print("Erro ao tentar salvar o token: $e");
@@ -92,6 +98,7 @@ abstract class _AuthStore with Store {
   Future<void> logOut() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.remove("accessToken");
+    await sharedPreferences.remove("userName");
     isLogged = false;
   }
 
@@ -100,9 +107,12 @@ abstract class _AuthStore with Store {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     String? token = sharedPreferences.getString('accessToken');
+    String? userName = sharedPreferences.getString('userName');
 
-    if (token != null) {
+    if (token != null && userName != null) {
       isLogged = true;
+
+      user = UserModel(id: "", userName: userName, email: "email");
     } else {
       isLogged = false;
     }

@@ -94,7 +94,7 @@ class _MyAppState extends State<MyApp> {
                                   ),
                                   child: ClipOval(
                                     child: Image.network(
-                                      'https://github.com/WillianMedeiros14.png',
+                                      'https://pbs.twimg.com/media/FKNlhKZUcAEd7FY?format=jpg&name=4096x4096',
                                       width: 75,
                                       height: 75,
                                       fit: BoxFit.cover,

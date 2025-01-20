@@ -92,9 +92,10 @@ mixin _$AuthStore on _AuthStore, Store {
       AsyncAction('_AuthStore.saveTokenFromResponse', context: context);
 
   @override
-  Future<bool> saveTokenFromResponse(String token) {
-    return _$saveTokenFromResponseAsyncAction
-        .run(() => super.saveTokenFromResponse(token));
+  Future<bool> saveTokenFromResponse(
+      {required String token, required String userName}) {
+    return _$saveTokenFromResponseAsyncAction.run(
+        () => super.saveTokenFromResponse(token: token, userName: userName));
   }
 
   late final _$logOutAsyncAction =
