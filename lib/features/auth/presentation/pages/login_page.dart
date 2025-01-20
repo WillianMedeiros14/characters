@@ -6,6 +6,7 @@ import 'package:alura_quest/features/auth/presentation/widgets/line_separate_or_
 
 import 'package:alura_quest/shared/data/interceptors/config/dio_interceptor.dart';
 import 'package:alura_quest/shared/data/interceptors/functions/dio_http_log_interceptor.dart';
+import 'package:alura_quest/shared/widgets/info_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,15 @@ class _LoginPageState extends State<LoginPage> {
   void _realTimeValidation() {
     _formKey.currentState!.validate();
     setState(() {});
+  }
+
+  void _infoModal() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return const InfoDialog();
+      },
+    );
   }
 
   @override
@@ -115,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Center(
                     child: TextButton(
-                      onPressed: () => {},
+                      onPressed: () => {_infoModal()},
                       child: const Text(
                         "Esqueceu a senha?",
                         style: TextStyle(
