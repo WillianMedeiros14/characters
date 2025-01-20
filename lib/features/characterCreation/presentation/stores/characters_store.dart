@@ -23,6 +23,9 @@ abstract class _CharactersStore with Store {
   @observable
   bool isLoading = true;
 
+  @observable
+  bool isLoadingDelete = false;
+
   @action
   Future<void> initializeCharacters() async {
     isLoading = true;
@@ -63,13 +66,16 @@ abstract class _CharactersStore with Store {
 
   @action
   Future<bool> deleteCharacterById(int characterId) async {
+    isLoadingDelete = true;
     final result =
         await characterRepository.deleteCharacterById(characterId: characterId);
 
     if (result == true) {
       characterList.removeWhere((character) => character.id == characterId);
+      isLoadingDelete = false;
       return true;
     } else {
+      isLoadingDelete = false;
       return false;
     }
   }

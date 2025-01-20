@@ -1,6 +1,7 @@
 import 'package:alura_quest/features/characterCreation/presentation/pages/character_creation_page.dart';
 import 'package:alura_quest/features/characterCreation/presentation/stores/characters_store.dart';
 import 'package:alura_quest/shared/model/character_model.dart';
+import 'package:alura_quest/shared/widgets/confirm_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,25 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
       );
     }
 
+    void _confirmDelete() {
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return ConfirmDialogWidget(
+            title: 'Deseja realmente deletar o personagem?',
+            isLoading: charactersStore.isLoadingDelete,
+            onSelectConfirmDialog: (String value) {
+              if (value == 'confirm') {
+                _deleteCharacterById();
+              } else {
+                Navigator.pop(context);
+              }
+            },
+          );
+        },
+      );
+    }
+
     return IconButton(
       icon: const Icon(Icons.more_vert),
       color: Colors.black,
@@ -95,7 +115,7 @@ class _MoreOptionsPageDetailsState extends State<MoreOptionsPageDetails> {
                               title: 'Editar',
                             ),
                             ItemMoreOptionsPageDetails(
-                              onPressed: _deleteCharacterById,
+                              onPressed: _confirmDelete,
                               icon: Icons.delete,
                               colorIcon: Colors.red,
                               title: 'Deletar',
@@ -120,6 +140,7 @@ class ItemMoreOptionsPageDetails extends StatelessWidget {
   final IconData icon;
   final Color colorIcon;
   final String title;
+
   const ItemMoreOptionsPageDetails({
     super.key,
     required this.onPressed,

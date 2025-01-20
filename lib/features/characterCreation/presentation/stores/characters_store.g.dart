@@ -58,6 +58,22 @@ mixin _$CharactersStore on _CharactersStore, Store {
     });
   }
 
+  late final _$isLoadingDeleteAtom =
+      Atom(name: '_CharactersStore.isLoadingDelete', context: context);
+
+  @override
+  bool get isLoadingDelete {
+    _$isLoadingDeleteAtom.reportRead();
+    return super.isLoadingDelete;
+  }
+
+  @override
+  set isLoadingDelete(bool value) {
+    _$isLoadingDeleteAtom.reportWrite(value, super.isLoadingDelete, () {
+      super.isLoadingDelete = value;
+    });
+  }
+
   late final _$initializeCharactersAsyncAction =
       AsyncAction('_CharactersStore.initializeCharacters', context: context);
 
@@ -115,7 +131,8 @@ mixin _$CharactersStore on _CharactersStore, Store {
     return '''
 characterList: ${characterList},
 searchCharacterListAll: ${searchCharacterListAll},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+isLoadingDelete: ${isLoadingDelete}
     ''';
   }
 }
