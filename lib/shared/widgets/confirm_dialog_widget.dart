@@ -47,10 +47,11 @@ class ConfirmDialogWidget extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
                               side: const BorderSide(
-                                  color: Colors.red, width: 1.5),
+                                color: Colors.red,
+                                width: 1.5,
+                              ),
                             ),
                             onPressed: () {
-                              onSelectConfirmDialog('cancel');
                               Navigator.pop(context);
                             },
                             child: const Text('Cancelar'),

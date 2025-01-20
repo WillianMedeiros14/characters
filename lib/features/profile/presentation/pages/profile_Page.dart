@@ -1,5 +1,6 @@
 import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/features/myApp/presentation/pages/my_app.dart';
+import 'package:alura_quest/shared/widgets/confirm_dialog_widget.dart';
 import 'package:alura_quest/shared/widgets/line_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +13,30 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  void _confirmLogOut(AuthStore authStore) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return ConfirmDialogWidget(
+          title: 'Deseja realmente sair?',
+          onSelectConfirmDialog: (String value) async {
+            if (value == 'confirm') {
+              await authStore.logOut();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (context) => const MyApp(),
+                ),
+                (Route<dynamic> route) => false,
+              );
+            } else {
+              Navigator.pop(context);
+            }
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final authStore = Provider.of<AuthStore>(context);
@@ -59,15 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title: "Sair",
               icon: Icons.logout_rounded,
               colorIcon: Colors.red,
-              onPressed: () async => {
-                await authStore.logOut(),
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const MyApp(),
-                  ),
-                  (Route<dynamic> route) => false,
-                )
-              },
+              onPressed: () async => {_confirmLogOut(authStore)},
             )
           ],
         ),
