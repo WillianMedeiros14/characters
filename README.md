@@ -64,10 +64,10 @@ O AluraQuest é um sistema gamificado de aprendizado, inspirado em aventuras de 
    cd characters
    ```
 
-2. Acesse a branch semana_24_WillianMedeiros:
+2. Acesse a branch main:
 
    ```bash
-    git checkout semana_24_WillianMedeiros
+    git checkout main
    ```
 
 3. Baixe as dependências:
