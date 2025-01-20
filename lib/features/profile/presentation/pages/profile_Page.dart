@@ -1,6 +1,7 @@
 import 'package:alura_quest/features/auth/presentation/stores/auth_store.dart';
 import 'package:alura_quest/features/myApp/presentation/pages/my_app.dart';
 import 'package:alura_quest/shared/widgets/confirm_dialog_widget.dart';
+import 'package:alura_quest/shared/widgets/info_dialog.dart';
 import 'package:alura_quest/shared/widgets/line_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,15 @@ class _ProfilePageState extends State<ProfilePage> {
             }
           },
         );
+      },
+    );
+  }
+
+  void _infoModal() {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return const InfoDialog();
       },
     );
   }
@@ -72,12 +82,12 @@ class _ProfilePageState extends State<ProfilePage> {
             ButtonOptionsProfile(
               title: "Dados pessoais",
               icon: Icons.person_2_rounded,
-              onPressed: () => {},
+              onPressed: () => {_infoModal()},
             ),
             ButtonOptionsProfile(
               title: "Configigurações",
               icon: Icons.settings_rounded,
-              onPressed: () => {},
+              onPressed: () => {_infoModal()},
             ),
             const LineVertical(),
             ButtonOptionsProfile(
